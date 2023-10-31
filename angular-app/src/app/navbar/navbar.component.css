@@ -1,0 +1,11 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #161616;
+    color: rgb(102, 102, 102);
+    font-family: 'Exo 2', sans-serif;
+    padding: 1.5em; /*Esto es todo lo que le da tamaño vertical al navbar, tal vez intercambiar con otro parametro en el futuro*/
+
+  }
