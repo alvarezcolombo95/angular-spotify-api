@@ -6,6 +6,7 @@ import { LandingComponent } from './landing/landing.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AboutComponent } from './about/about.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LogInComponent } from './log-in/log-in.component';
 import { SearchboxComponent } from './searchbox/searchbox.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -15,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LandingComponent,
     NavbarComponent,
     AboutComponent,
+    LogInComponent,
     SearchboxComponent
   ],
   imports: [
