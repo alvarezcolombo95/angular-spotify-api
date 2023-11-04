@@ -7,7 +7,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Angular + Spotify</a>
+        <a class="navbar-brand" href="#" [routerLink]="['/home']">Angular + Spotify</a>
       </div>
 
       <app-searchbox></app-searchbox>
@@ -32,8 +32,10 @@
         </ul>
         
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Link</a></li>
-        </ul>
+          <li><a href="#" [routerLink]="['/log-in']">Log In</a></li>
+      
+        <img class="float-end"  src="../../assets/img/Spotify-Icon.png" alt="Icon" id="icon" width="40px"  height="40px" >
+      </ul>
       </div>
     </div>
   </nav>
