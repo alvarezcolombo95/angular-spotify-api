@@ -1,0 +1,12 @@
+<div class="row" *ngIf="searchResult && searchResult.artists && searchResult.artists.items">
+  <div *ngFor="let item of searchResult.artists.items" class="col-md-2">
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{item.images && item.images.length > 0 ? item.images[0].url : '/assets/img/default-image-artist.png'}}" alt="Card image cap" height="240" width="240">
+      <div class="card-body">
+        <h5 class="card-title">{{item.name}}</h5>
+        <p class="card-text">Seguidores: {{item.followers.total}}<br>Generos: {{item.genres[0]}}</p>
+        <button class="btn btn-primary" (click)="funcionTest()">Test</button>
+      </div>
+    </div>
+  </div>
+</div>
