@@ -1,6 +1,29 @@
-html{
-    background-color: blue;
+img{
+    height: 250px;
 }
-h2{
-    font-size: 100px;
+#logButton{
+    padding-top: 10%;
+}
+.btn-primary{
+    background-color: #1db954;
+    border-radius: 25px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-color: #191414;
+}
+.btn:hover {
+    background-color: var(#191414);
+    color: var(#ffffff);
+    border-color: var(#ffffff);
+ }
+ 
+ .btn-primary:active {
+    background-color: var(#1db954);
+    color: var(#191414);
+    border-color: var(#191414);
+ }
+ 
+
+#logo{
+    padding-top: 5%;
 }
