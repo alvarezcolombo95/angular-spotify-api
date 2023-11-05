@@ -1,8 +1,6 @@
 //NO TENGO IDEA DE LO QUE ESTOY HACIENDO, IGNORAR POR AHORA
 
 import { Injectable, EventEmitter } from '@angular/core';
-/*import {HttpClient, HttpHeaders} from '@angular/common/http';*/
-/*import {map} from 'rxjs/operators';*/
 
 @Injectable({
   providedIn: 'root'
@@ -78,18 +76,3 @@ export class SpotifySearchItemService {
     
 }
 
-
-
-/*
-    public fetchedToken = fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        body: new URLSearchParams({
-          'grant_type': 'client_credentials',
-          'client_id': 'your-client-id',
-          'client_secret': 'your-client-secret'
-        })
-      });
-    */
-   
-      /*
-  constructor() { }*/
