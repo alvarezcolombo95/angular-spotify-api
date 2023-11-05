@@ -25,11 +25,14 @@ export class SearchboxComponent implements OnInit {
   }
 
 
-  searchMusic() {
+  async searchMusic() {
     const searchStr = this.searchForm.get('searchStr')?.value;
     //console.log(searchStr);
-    this.spotifyService.asyncCallSearchItem(searchStr);
+    let res = await this.spotifyService.asyncCallSearchItem(searchStr);
 
+    console.log("log desde searchbox component:")
+    console.log(res);
 
+    
   }
 }

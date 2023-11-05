@@ -45,8 +45,10 @@ export class SpotifySearchItemService {
         const res = await this.getSearchItem(input);
         console.log('respuesta JSON:');
         console.log(res);
+        return res;
       } catch (error) {
         console.log(error);
+        return error;
       };
     }
     
