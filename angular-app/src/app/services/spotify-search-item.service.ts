@@ -1,9 +1,9 @@
 //NO TENGO IDEA DE LO QUE ESTOY HACIENDO, IGNORAR POR AHORA
 
-/*import { Injectable, EventEmitter } from '@angular/core';*/
+import { Injectable, EventEmitter } from '@angular/core';
 /*import {HttpClient, HttpHeaders} from '@angular/common/http';*/
 /*import {map} from 'rxjs/operators';*/
-/*
+
 @Injectable({
   providedIn: 'root'
 })
@@ -41,11 +41,44 @@ export class SpotifySearchItemService {
       };
     }
 
-    constructor(private searchInputChange: EventEmitter<string>) { }
+    constructor() { }
 
-
+    async asyncCallSearchItem(input: string) {
+      console.log('Pidiendo');
+      try {
+        const res = await this.getSearchItem(input);
+        console.log('respuesta JSON:');
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      };
+    }
+    
+    getSearchItem(input: string) {
+      return new Promise(async (resolve, reject) => {
+        const data =null;
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://api.spotify.com/v1/search?q='+input+'&type='+'artist');
+        xhr.setRequestHeader('Authorization', `Bearer ${await this.GetToken()}`);
+    
+        xhr.onload = function () { 
+                if (xhr.status == 200) {
+                    console.log('respuesta del servidor o API Pedido Search Item');
+                    let data = JSON.parse(this.response);
+                    resolve(data);
+                } else {
+                    reject(new Error('error en la conexion'));
+                }
+            };
+    
+            xhr.send(data); 
+    
+      });
+    }
     
 }
+
+
 
 /*
     public fetchedToken = fetch('https://accounts.spotify.com/api/token', {
