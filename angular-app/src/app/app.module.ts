@@ -11,6 +11,7 @@ import { SearchboxComponent } from './searchbox/searchbox.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchResultArtistComponent } from './search-result-artist/search-result-artist.component';
 import { ContainerMainComponent } from './container-main/container-main.component';
+import { ContainerContentComponent } from './container-content/container-content.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ContainerMainComponent } from './container-main/container-main.componen
     LogInComponent,
     SearchboxComponent,
     SearchResultArtistComponent,
-    ContainerMainComponent
+    ContainerMainComponent,
+    ContainerContentComponent
   ],
   imports: [
     BrowserModule,
