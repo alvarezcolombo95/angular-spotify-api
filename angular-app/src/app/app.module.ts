@@ -10,6 +10,7 @@ import { LogInComponent } from './log-in/log-in.component';
 import { SearchboxComponent } from './searchbox/searchbox.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchResultArtistComponent } from './search-result-artist/search-result-artist.component';
+import { ContainerMainComponent } from './container-main/container-main.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SearchResultArtistComponent } from './search-result-artist/search-resul
     AboutComponent,
     LogInComponent,
     SearchboxComponent,
-    SearchResultArtistComponent
+    SearchResultArtistComponent,
+    ContainerMainComponent
   ],
   imports: [
     BrowserModule,
