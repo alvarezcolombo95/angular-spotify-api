@@ -1,3 +1,5 @@
+/*ESTE SERVICIO ES PARA ENVIAR INFORMACION ENTRE SEARCHBOX Y SEARCH RESULT*/
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
