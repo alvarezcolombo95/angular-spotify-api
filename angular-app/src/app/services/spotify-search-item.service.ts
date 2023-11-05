@@ -1,5 +1,3 @@
-//NO TENGO IDEA DE LO QUE ESTOY HACIENDO, IGNORAR POR AHORA
-
 import { Injectable, EventEmitter } from '@angular/core';
 
 @Injectable({
