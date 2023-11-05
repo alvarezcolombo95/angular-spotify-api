@@ -9,6 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { LogInComponent } from './log-in/log-in.component';
 import { SearchboxComponent } from './searchbox/searchbox.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchResultArtistComponent } from './search-result-artist/search-result-artist.component';
+import { ContainerMainComponent } from './container-main/container-main.component';
+import { ContainerContentComponent } from './container-content/container-content.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NavbarComponent,
     AboutComponent,
     LogInComponent,
-    SearchboxComponent
+    SearchboxComponent,
+    SearchResultArtistComponent,
+    ContainerMainComponent,
+    ContainerContentComponent
   ],
   imports: [
     BrowserModule,

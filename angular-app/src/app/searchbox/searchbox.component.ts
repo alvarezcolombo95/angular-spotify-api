@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-
-
-
+import { SpotifySearchItemService } from '../services/spotify-search-item.service';
+import { AppRoutingModule } from '../app-routing.module';
+import { Router } from '@angular/router';
+import { SearchCommService } from '../services/search-comm.service';
 
 @Component({
   selector: 'app-searchbox',
@@ -13,9 +14,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class SearchboxComponent implements OnInit {
   
   searchForm: FormGroup;
-
+  searchResult: any = null;
   
-  constructor() {
+  constructor(private spotifyService: SpotifySearchItemService, private router: Router, private data: SearchCommService) {
     this.searchForm = new FormGroup({
       searchStr: new FormControl('')
     });
@@ -25,11 +26,22 @@ export class SearchboxComponent implements OnInit {
     this.searchForm = new FormGroup({
       searchStr: new FormControl('')
     });
+
+    this.data.currentResult.subscribe(searchResult => this.searchResult = searchResult)
+
   }
 
 
-  searchMusic() {
+  async searchMusic() {
     const searchStr = this.searchForm.get('searchStr')?.value;
-    console.log(searchStr);
+    this.router.navigate(['/search-result-artist'])
+
+    this.searchResult = await this.spotifyService.asyncCallSearchItem(searchStr);
+    this.data.changeResult(this.searchResult);
+    /*
+    console.log("log desde searchbox component:")
+    console.log(this.searchResult);*/
+
+    
   }
 }
