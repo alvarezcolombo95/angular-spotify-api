@@ -11,10 +11,12 @@ import { SearchResultArtistComponent } from './search-result-artist/search-resul
 
 
 const routes: Routes = [
-  {path: 'home', component: SearchResultArtistComponent},
+  {path: 'home', component: LandingComponent},
   {path: 'log-in', component: LogInComponent},
   {path: 'about', component: AboutComponent},
+  {path: 'search-result-artist', component: SearchResultArtistComponent},
   {path: '**', component: LandingComponent }
+  
 ];
 
 @NgModule({
