@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-
-
-
+import { SpotifySearchItemService } from '../services/spotify-search-item.service';
 
 @Component({
   selector: 'app-searchbox',
@@ -13,9 +11,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class SearchboxComponent implements OnInit {
   
   searchForm: FormGroup;
-
   
-  constructor() {
+  constructor(private spotifyService: SpotifySearchItemService) {
     this.searchForm = new FormGroup({
       searchStr: new FormControl('')
     });
@@ -30,6 +27,9 @@ export class SearchboxComponent implements OnInit {
 
   searchMusic() {
     const searchStr = this.searchForm.get('searchStr')?.value;
-    console.log(searchStr);
+    //console.log(searchStr);
+    this.spotifyService.asyncCallSearchItem(searchStr);
+
+
   }
 }
