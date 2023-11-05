@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SearchCommService } from '../services/search-comm.service';
+import { tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-result-artist',
@@ -9,15 +12,31 @@ import { SearchCommService } from '../services/search-comm.service';
 export class SearchResultArtistComponent implements OnInit {
 
   searchResult: any = null;
+  private subscription?: Subscription;
+
+  artistName: string = ''
 
   constructor(private data: SearchCommService) {}
 
   ngOnInit(): void {
-    this.data.currentResult.subscribe(searchResult => this.searchResult = searchResult)
+
+    //this.subscription = this.data.currentResult.subscribe(searchResult => this.searchResult = searchResult);
+
+    this.subscription = this.data.currentResult.pipe(
+      filter(searchResult => searchResult !== null),
+      tap(searchResult => {
+        this.artistName = searchResult.artists.items[0].name
+      })
+    ).subscribe(searchResult => this.searchResult = searchResult);
+    /*this.data.currentResult.subscribe(searchResult => this.searchResult = searchResult)*/
   }
 
-  funcionTest()
-  {
-    console.log(this.searchResult)
+  funcionTest(){
+    console.log("funcionTest()" + this.artistName)
   }
+
+
+
+
+  
 }
