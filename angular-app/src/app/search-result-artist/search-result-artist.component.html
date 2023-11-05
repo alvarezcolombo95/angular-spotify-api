@@ -1,12 +1,34 @@
+<!--
 <div class="row" *ngIf="searchResult && searchResult.artists && searchResult.artists.items">
   <div *ngFor="let item of searchResult.artists.items" class="col-md-2">
     <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="{{item.images && item.images.length > 0 ? item.images[0].url : '/assets/img/default-image-artist.png'}}" alt="Card image cap" height="240" width="240">
+      <img class="card-img-top" src="{{item.images && item.images.length > 0 ? item.images[0].url : '/assets/img/default-image-artist.png'}}" alt="Card image cap" height="200" width="200">
       <div class="card-body">
-        <h5 class="card-title">{{item.name}}</h5>
-        <p class="card-text">Seguidores: {{item.followers.total}}<br>Generos: {{item.genres[0]}}</p>
+        <h5 class="card-title text-truncate">{{item.name}}</h5>
+        <p class="card-text text-truncate">Seguidores: {{item.followers.total}}<br>Generos: {{item.genres[0]}}</p>
         <button class="btn btn-primary" (click)="funcionTest()">Test</button>
       </div>
     </div>
   </div>
 </div>
+-->
+
+
+ <div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters" *ngIf="searchResult && searchResult.artists && searchResult.artists.items">
+    <div *ngFor="let item of searchResult.artists.items">
+      <div  class="col-md-4">
+        <img src="{{item.images && item.images.length > 0 ? item.images[0].url : '/assets/img/default-image-artist.png'}}" class="card-img" alt="Card image cap" height="100" width="100">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{item.name}}</h5>
+          <p class="card-text">Generos: {{item.genres[0]}}</p>
+          <p class="card-text"><small class="text-muted">Seguidores: {{item.followers.total}}</small></p>
+        </div>
+      </div>
+    </div>    
+  </div>
+</div>
+
+ 
