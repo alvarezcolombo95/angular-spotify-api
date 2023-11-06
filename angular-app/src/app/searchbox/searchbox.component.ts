@@ -15,6 +15,7 @@ export class SearchboxComponent implements OnInit {
   
   searchForm: FormGroup;
   searchResult: any = null;
+  searchType: string = 'Artistas';
   
   constructor(private spotifyService: SpotifySearchItemService, private router: Router, private data: SearchCommService) {
     this.searchForm = new FormGroup({
@@ -29,6 +30,10 @@ export class SearchboxComponent implements OnInit {
 
     this.data.currentResult.subscribe(searchResult => this.searchResult = searchResult)
 
+  }
+
+  toggleSearchType() {
+    this.searchType = this.searchType === 'Artistas' ? 'Canciones' : 'Artistas';
   }
 
 
