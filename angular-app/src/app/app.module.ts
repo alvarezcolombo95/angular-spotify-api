@@ -14,6 +14,7 @@ import { ContainerMainComponent } from './container-main/container-main.componen
 import { ContainerContentComponent } from './container-content/container-content.component';
 import { ContainerResultsComponent } from './container-results/container-results.component';
 import { SearchResultSongComponent } from './search-result-song/search-result-song.component';
+import { DetailArtistComponent } from './detail-artist/detail-artist.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SearchResultSongComponent } from './search-result-song/search-result-so
     ContainerMainComponent,
     ContainerContentComponent,
     ContainerResultsComponent,
-    SearchResultSongComponent
+    SearchResultSongComponent,
+    DetailArtistComponent
   ],
   imports: [
     BrowserModule,
