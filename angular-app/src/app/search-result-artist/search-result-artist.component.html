@@ -13,22 +13,22 @@
 </div>
 -->
 
-
- <div class="card mb-4" style="max-width: 540px;">
-  <div class="row no-gutters" *ngIf="searchResult && searchResult.artists && searchResult.artists.items">
+<div class="card mb-4" style="max-width: 540px;">
+  <div style="margin-left: 0px;" class="row no-gutters" *ngIf="searchResult && searchResult.artists && searchResult.artists.items">
+    <h2 class="page-header" style="margin-left: 15px; margin-bottom: 20px;">Artistas</h2>
     <div *ngFor="let item of searchResult.artists.items">
-      <div  class="col-md-7" style="max-width: 200px;">
+      <div class="col-md-7" style="max-width: 200px;">
         <img src="{{item.images && item.images.length > 0 ? item.images[0].url : '/assets/img/default-image-artist.png'}}" class="card-img" alt="Card image cap" height="170" width="170">
       </div>
       <div class="col-md-5" style="min-height: 180px;">
         <div class="card-body">
           <h5 class="card-title">{{item.name}}</h5>
-          <p class="card-text">Generos: {{item.genres[0]}}</p>
-          <p class="card-text"><small class="text-muted">Seguidores: {{item.followers.total}}</small></p>
+          <p *ngFor="let genre of item.genres | slice:0:5" class="label label-primary d-inline-block mr-3" style="margin-right: 5px;">{{genre}}</p>
+          <p class="card-text" style="margin-top: 10px;"><small class="text-muted">Seguidores: {{item.followers.total}}</small></p>
         </div>
       </div>
     </div>    
   </div>
-</div>
+ </div>
 
  
