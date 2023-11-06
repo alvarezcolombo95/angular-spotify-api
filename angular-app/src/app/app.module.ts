@@ -12,6 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchResultArtistComponent } from './search-result-artist/search-result-artist.component';
 import { ContainerMainComponent } from './container-main/container-main.component';
 import { ContainerContentComponent } from './container-content/container-content.component';
+import { ContainerResultsComponent } from './container-results/container-results.component';
+import { SearchResultSongComponent } from './search-result-song/search-result-song.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { ContainerContentComponent } from './container-content/container-content
     SearchboxComponent,
     SearchResultArtistComponent,
     ContainerMainComponent,
-    ContainerContentComponent
+    ContainerContentComponent,
+    ContainerResultsComponent,
+    SearchResultSongComponent
   ],
   imports: [
     BrowserModule,
