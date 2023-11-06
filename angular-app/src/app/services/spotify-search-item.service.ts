@@ -39,10 +39,10 @@ export class SpotifySearchItemService {
 
     constructor() { }
 
-    async asyncCallSearchItem(input: string) {
+    async asyncCallSearchItem(input: string, type: string) {
       console.log('Pidiendo');
       try {
-        const res = await this.getSearchItem(input);
+        const res = await this.getSearchItem(input, type);
         console.log('respuesta JSON:');
         console.log(res);
         return res;
@@ -52,11 +52,11 @@ export class SpotifySearchItemService {
       };
     }
     
-    getSearchItem(input: string) {
+    getSearchItem(input: string, type: string) {
       return new Promise(async (resolve, reject) => {
         const data =null;
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://api.spotify.com/v1/search?q='+input+'&type='+'artist');
+        xhr.open('GET', 'https://api.spotify.com/v1/search?q='+input+'&type='+ type);
         xhr.setRequestHeader('Authorization', `Bearer ${await this.GetToken()}`);
     
         xhr.onload = function () { 
