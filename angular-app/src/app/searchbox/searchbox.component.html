@@ -7,9 +7,29 @@
     <button type="submit" class="btn btn-default">Buscar</button>
   </form>-->
 
+
+
   <form class="navbar-form navbar-left" [formGroup]="searchForm" (ngSubmit)="searchMusic()">
+    <button type="button"  (click)="toggleSearchType()" class="btn btn-default">{{searchType}}</button>
     <div class="form-group">
-      <input type="text" class="form-control" formControlName="searchStr" placeholder="Buscar canción o artista..." >
+      <input type="text" class="form-control" formControlName="searchStr" placeholder="Buscar {{searchType}}..." style="width: 400px;" >
     </div>
     <button type="submit" class="btn btn-default">Buscar</button>
   </form>
+
+  <!--
+  <div class="form-group">
+    <label class="control-label">Input addons</label>
+    <div class="input-group">
+      <span class="input-group-addon">$</span>
+      <input type="text" class="form-control">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Button</button>
+      </span>
+    </div>
+  </div>-->
+
+  
+
+
+  
