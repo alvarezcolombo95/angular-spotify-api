@@ -40,7 +40,7 @@
 </div>
 -->
 
- <div *ngIf="searchResult && searchResult.tracks && searchResult.tracks.items">
+ <div *ngIf="searchResult && searchResult.tracks && searchResult.tracks.items" style="max-width: 740px;">
     <h2 class="page-header" style="margin-left: 15px; margin-bottom: 20px;">Canciones</h2>
     <div class="media" *ngFor="let item of searchResult.tracks.items">
     <div class="media-left">
@@ -50,7 +50,7 @@
     </div>
     <div class="media-body">
         <h4 class="media-heading">{{item.name}}</h4>
-        <span *ngFor="let artist of item.artists; let isLast=last" class="card-text"><span class="">{{artist.name}}{{isLast ? '' : ', '}}</span></span>
+        <span *ngFor="let artist of item.artists ; let isLast=last " class="card-text"><span class="">{{artist.name}}{{isLast ? '' : ', '}}</span></span>
         <p class="card-text"><small class="text-muted">{{item.album.name}}</small></p>
     </div>
     </div>
