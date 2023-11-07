@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -15,6 +15,7 @@ import { ContainerContentComponent } from './container-content/container-content
 import { ContainerResultsComponent } from './container-results/container-results.component';
 import { SearchResultSongComponent } from './search-result-song/search-result-song.component';
 import { DetailArtistComponent } from './detail-artist/detail-artist.component';
+import { PlayerComponent } from './components/playerComponent/player/player.component';
 
 @NgModule({
   declarations: [
@@ -29,13 +30,15 @@ import { DetailArtistComponent } from './detail-artist/detail-artist.component';
     ContainerContentComponent,
     ContainerResultsComponent,
     SearchResultSongComponent,
-    DetailArtistComponent
+    DetailArtistComponent,
+    PlayerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
