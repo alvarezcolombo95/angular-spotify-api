@@ -16,7 +16,6 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'search-result-artist', component: SearchResultArtistComponent},
   {path: '**', component: LandingComponent }
-  
 ];
 
 @NgModule({

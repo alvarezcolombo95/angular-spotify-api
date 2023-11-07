@@ -13,6 +13,9 @@ export const SpotifyConfiguration = {
         'playlist-modify-public',
         'user-top-read',
         'user-read-recently-played',
-        'user-library-read'],
-    redirectUrl: 'http://localhost:4200/home'
+        'user-read-currently-playing    ',
+        'user-library-read',
+        'user-read-playback-state',
+        'user-modify-playback-state'],
+    redirectUrl: 'http://localhost:4200/log-in'
 }
