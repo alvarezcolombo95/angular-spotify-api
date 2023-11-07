@@ -60,13 +60,4 @@ export class LoginService {
     }
    }
    
-// async  reproducir(token:string,deviceId:string){
-//   await fetch('https://api.spotify.com/v1/me/player/play', {
-//     method: 'PUT',
-//     headers: {
-//       'Authorization': `Bearer ${token}`,
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({ device_ids: [deviceId] }),})
-// };
 }

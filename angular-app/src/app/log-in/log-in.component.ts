@@ -20,6 +20,7 @@ export class LogInComponent implements OnInit {
     if (!this.sesionIniciada()) {
       let tkn = this.loginService.getToken(); // Si no esta inicciada la sesion, lo hago
       localStorage.setItem('token', tkn) //guardo el token
+      console.log(tkn)
     }
   }
 
