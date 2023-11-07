@@ -59,11 +59,11 @@
   <div class="media-body">
       <h5 class="media-heading">{{item.name}}</h5>
       <p *ngFor="let genre of item.genres | slice:0:5" class="label label-primary d-inline-block mr-3" style="margin-right: 5px;">{{genre}}</p>
-          <p class="card-text" style="margin-top: 10px;"><small class="text-muted">Seguidores: {{item.followers.total}}</small></p>
+      <p class="card-text" style="margin-top: 10px;"><small class="text-muted">{{item.followers.total}} seguidores</small></p>
+      <a href="" class="btn btn-default">Ver Detalles</a>
   </div>
   </div>
  </div>
-
 
 
  
