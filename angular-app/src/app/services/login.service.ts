@@ -1,13 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { SpotifyConfiguration } from 'src/environments/environment';
+import { DevicesService } from './devices.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class LoginService {
+export class LoginService implements OnInit{
 
-  constructor() { }
+  constructor(private deviceservice: DevicesService) { }
+  ngOnInit(): void {
+  }
+
+  
   getUrlLogin() {
     const authEndPoint = `${SpotifyConfiguration.authEndpoint}?`;
     const clientId = `client_id=${SpotifyConfiguration.clientId}&`;
@@ -17,47 +22,24 @@ export class LoginService {
     return authEndPoint + clientId + redirectUrl + scopes + responseType;
   }
 
-  getToken() {
+
+  getTokenFromUrl() {
     if (!window.location.hash)
-      return '';
+    {
+    console.log('No existe token en la url');
+    return '';
+    }
+      
     else{
+      console.log('se encontro un token')
       const params = window.location.hash.substring(1).split('&');   //Separo el token y sus atributos
       let token = params[0].split('=')[1];
       return  token// Retorno el token especificamente
     }
   }
+  public token = this.getTokenFromUrl();
+  
 
-  async  obtenerDispositivos(token:string) {
-    const response = await fetch('https://api.spotify.com/v1/me/player/devices', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-    return data.devices;
-   }
-   async  play(token:string,deviceId: string) {
-    await fetch('https://api.spotify.com/v1/me/player/play', {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ device_ids: [deviceId] }),
-    });
-   }
-   
-   
-
-   async  reproducir(token: string) {
-    const devices = await this.obtenerDispositivos(token);
-    if (devices.length > 0) {
-      const deviceId = devices[0].id;
-      await this.play(token,deviceId);
-    } else {
-      console.log('No hay dispositivos disponibles');
-    }
-   }
+  
    
 }

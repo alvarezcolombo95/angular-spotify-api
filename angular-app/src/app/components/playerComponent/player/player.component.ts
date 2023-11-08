@@ -1,75 +1,81 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from 'src/app/services/PlayerService/player.service';
-import { LoginService } from 'src/app/services/login.service';
+
+
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.css']
 })
+
 export class PlayerComponent implements OnInit{
 
-constructor(private loginservice: LoginService,private  playerservise: PlayerService){}
+constructor(private  playerservise: PlayerService){}
 
 
   ngOnInit(): void {
-    this.tokenVerify();
-    
   }
   
-  tokenVerify() {
-    if (!this.sesionIniciada()) {
-      let tk = this.loginservice.getToken(); // Si no esta inicciada la sesion, lo hago
-      localStorage.setItem('token', tk) //guardo el token
-      console.log(tk)
-    }
-  }
   
-  sesionIniciada() {
-    let tk = localStorage.getItem('token');
-    if (!!tk) {
-      // console.log(tkn);
-      console.log('Sesion iniciada')
-      this.loginservice.reproducir(tk);
-      return 1;
-    }
-    else {
-      console.log('Debe iniciar sesion')
-      return 0;
-    }
+  getToken(){
+    return localStorage.getItem('token');
   }
 
   previous(){
-    let tk = localStorage.getItem('token');
-    if(!!tk){
-      this.playerservise.previousSong(tk);
+    let token = this.getToken();
+    if(!!token){
+      this.playerservise.previousSong(token);
     }
   }
   playpause(){
-    let tk = localStorage.getItem('token');
-    if (!!tk) {
-      // console.log(tkn);
-      console.log('Sesion iniciada')
-      this.loginservice.reproducir(tk);
-      return 1;
-    }
-    else {
-      console.log('Debe iniciar sesion')
-      return 0;
-    }
+    let token = this.getToken();
+    if(!!token)
+    this.playerservise.playPause(token);
+    // const token = this.loginservice.token;
+    // if (!!token) {
+    //   // console.log(tkn);
+    //   console.log('Sesion iniciada')
+    //   this.playerservise.playPause(token)
+    //   return 1;
+    // }
+    // else {
+    //   console.log('Debe iniciar sesion')
+    //   return 0;
+    // }
   }
-    // let tk = localStorage.getItem('token');
-    // if(!!tk){
-    //   this.playerservise.playPause(tk);
     
 
   next(){
-    let tk = localStorage.getItem('token');
-    if(!!tk){
-      this.playerservise.nextSong(tk);
+    let token = this.getToken();
+    if(!!token){
+      this.playerservise.nextSong(token);
     }
-  }
+  // }
+  // tokenVerify() {
+  //   if (!this.sesionIniciada()) {
+  //     let tk = this.loginservice.getTokenFromUrl(); // Si no esta inicciada la sesion, lo hago
+  //     localStorage.setItem('token', tk) //guardo el token
+  //     console.log(tk)
+  //   }
+  // }
+  
+  // sesionIniciada() {
+  //   let tk = localStorage.getItem('token');
+  //   if (!!tk) {
+  //     // console.log(tkn);
+  //     console.log('Sesion iniciada')
+  //     //this.loginservice.reproducir(tk);
+  //     return 1;
+  //   }
+  //   else {
+  //     console.log('Debe iniciar sesion')
+  //     return 0;
+  //   }
+  // }
+
+  
   
  
 
 
-}
+}}

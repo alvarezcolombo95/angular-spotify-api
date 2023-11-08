@@ -17,5 +17,6 @@ export const SpotifyConfiguration = {
         'user-library-read',
         'user-read-playback-state',
         'user-modify-playback-state'],
-    redirectUrl: 'http://localhost:4200/log-in'
+    redirectUrl: 'http://localhost:4200/log-in',
+    token: ''
 }
