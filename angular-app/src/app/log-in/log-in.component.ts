@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../services/login.service';
+import { PlayerService } from '../services/PlayerService/player.service';
 
 @Component({
   selector: 'app-log-in',
@@ -8,28 +9,31 @@ import { LoginService } from '../services/login.service';
 })
 export class LogInComponent implements OnInit {
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, private playerservice: PlayerService) {
 
-
+    
   }
   ngOnInit(): void {
-    this.tokenVerify();
+    //this.tokenVerify();
+    let token = this.loginService.token
+    localStorage.setItem('token',token)
+    console.log(localStorage.getItem('token'))
   }
 
   tokenVerify() {
     if (!this.sesionIniciada()) {
-      let tkn = this.loginService.getToken(); // Si no esta inicciada la sesion, lo hago
+      let tkn = this.loginService.token; //this.loginService.getTokenFromUrl(); // Si no esta inicciada la sesion, lo hago
       localStorage.setItem('token', tkn) //guardo el token
       console.log(tkn)
     }
   }
 
   sesionIniciada() {
-    let tkn = localStorage.getItem('token');
-    if (!!tkn) {
+    const token = this.loginService.token;
+    if (!!token) {
       // console.log(tkn);
       console.log('Sesion iniciada')
-      this.loginService.reproducir(tkn);
+      this.playerservice.playPause(token);
       return 1;
     }
     else {
