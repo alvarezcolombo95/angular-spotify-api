@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
 import { SearchResultArtistComponent } from './search-result-artist/search-result-artist.component';
 import { SearchResultSongComponent } from './search-result-song/search-result-song.component';
+import { PlayerComponent } from './components/playerComponent/player/player.component';
 
 
 
@@ -17,8 +18,8 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'search-result-artist', component: SearchResultArtistComponent},
   {path: 'search-result-song', component: SearchResultSongComponent},
-  {path: '**', component: LandingComponent }
-  
+  {path: 'player', component: PlayerComponent},
+  {path: '**', component: LandingComponent },
 ];
 
 @NgModule({
