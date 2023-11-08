@@ -36,5 +36,6 @@ export class SearchResultArtistComponent implements OnInit {
 
 
 
+
   
 }
