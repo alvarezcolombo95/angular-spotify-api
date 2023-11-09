@@ -7,6 +7,7 @@ import { DevicesService } from './devices.service';
 })
 
 export class LoginService implements OnInit{
+  private isloged: boolean = false;
 
   constructor(private deviceservice: DevicesService) { }
   ngOnInit(): void {
@@ -34,12 +35,19 @@ export class LoginService implements OnInit{
       console.log('se encontro un token')
       const params = window.location.hash.substring(1).split('&');   //Separo el token y sus atributos
       let token = params[0].split('=')[1];
+      this.isloged=true;
       return  token// Retorno el token especificamente
     }
   }
   public token = this.getTokenFromUrl();
   
+  logOut(){
+    this.isloged=false;
+  }
 
+  checkLog(){
+    return this.isloged;
+  }
   
    
 }

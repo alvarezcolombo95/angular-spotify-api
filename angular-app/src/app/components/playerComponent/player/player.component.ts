@@ -29,19 +29,9 @@ constructor(private  playerservise: PlayerService){}
   }
   playpause(){
     let token = this.getToken();
-    if(!!token)
+    if(!!token){
     this.playerservise.playPause(token);
-    // const token = this.loginservice.token;
-    // if (!!token) {
-    //   // console.log(tkn);
-    //   console.log('Sesion iniciada')
-    //   this.playerservise.playPause(token)
-    //   return 1;
-    // }
-    // else {
-    //   console.log('Debe iniciar sesion')
-    //   return 0;
-    // }
+    }
   }
     
 
