@@ -29,9 +29,7 @@ export class SearchResultArtistComponent implements OnInit {
     /*this.data.currentResult.subscribe(searchResult => this.searchResult = searchResult)*/
   }
 
-  funcionTest(){
-    console.log("funcionTest()")
-  }
+  
 
 
 
