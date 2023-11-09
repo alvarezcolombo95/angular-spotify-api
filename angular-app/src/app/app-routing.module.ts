@@ -8,6 +8,7 @@ import { AboutComponent } from './about/about.component';
 import { SearchResultArtistComponent } from './search-result-artist/search-result-artist.component';
 import { SearchResultSongComponent } from './search-result-song/search-result-song.component';
 import { PlayerComponent } from './components/playerComponent/player/player.component';
+import { logGuard } from './services/log-guard.guard';
 
 
 
@@ -19,7 +20,10 @@ const routes: Routes = [
   {path: 'search-result-artist', component: SearchResultArtistComponent},
   {path: 'search-result-song', component: SearchResultSongComponent},
   {path: 'player', component: PlayerComponent},
+  {path: 'protected', component: PlayerComponent, canActivate: [logGuard]},
   {path: '**', component: LandingComponent },
+  {path: '', component: LandingComponent }
+  
 ];
 
 @NgModule({

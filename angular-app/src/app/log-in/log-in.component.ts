@@ -47,6 +47,8 @@ export class LogInComponent implements OnInit {
   whenCLick() {
     window.location.href = this.loginService.getUrlLogin();
   }
-
+  logout(){
+      this.loginService.logOut();
+  }
 
 }
