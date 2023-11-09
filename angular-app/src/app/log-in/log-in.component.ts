@@ -49,6 +49,7 @@ export class LogInComponent implements OnInit {
   }
   logout(){
       this.loginService.logOut();
+      localStorage.setItem('token', '')
   }
 
 }

@@ -40,32 +40,18 @@ constructor(private  playerservise: PlayerService){}
     if(!!token){
       this.playerservise.nextSong(token);
     }
-  // }
-  // tokenVerify() {
-  //   if (!this.sesionIniciada()) {
-  //     let tk = this.loginservice.getTokenFromUrl(); // Si no esta inicciada la sesion, lo hago
-  //     localStorage.setItem('token', tk) //guardo el token
-  //     console.log(tk)
-  //   }
-  // }
-  
-  // sesionIniciada() {
-  //   let tk = localStorage.getItem('token');
-  //   if (!!tk) {
-  //     // console.log(tkn);
-  //     console.log('Sesion iniciada')
-  //     //this.loginservice.reproducir(tk);
-  //     return 1;
-  //   }
-  //   else {
-  //     console.log('Debe iniciar sesion')
-  //     return 0;
-  //   }
-  // }
 
-  
-  
- 
-
-
-}}
+}
+  sesionIniciada() {
+    let tk = localStorage.getItem('token');
+    if (!!tk) {
+      console.log('Sesion iniciada')
+      return 1;
+    }
+    else {
+      console.log('Debe iniciar sesion')
+      //alert('Debe iniciar sesion primero');
+      return 0;
+    }
+  }
+}

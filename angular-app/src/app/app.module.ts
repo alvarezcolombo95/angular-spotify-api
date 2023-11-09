@@ -16,6 +16,7 @@ import { ContainerResultsComponent } from './container-results/container-results
 import { SearchResultSongComponent } from './search-result-song/search-result-song.component';
 import { DetailArtistComponent } from './detail-artist/detail-artist.component';
 import { PlayerComponent } from './components/playerComponent/player/player.component';
+import { UserComponentComponent } from './components/UserInfo/user-component/user-component.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PlayerComponent } from './components/playerComponent/player/player.comp
     ContainerResultsComponent,
     SearchResultSongComponent,
     DetailArtistComponent,
-    PlayerComponent
+    PlayerComponent,
+    UserComponentComponent
   ],
   imports: [
     BrowserModule,
