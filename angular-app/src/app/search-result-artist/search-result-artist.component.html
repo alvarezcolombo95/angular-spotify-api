@@ -50,10 +50,10 @@
 
 <div class="row" *ngIf="searchResult && searchResult.artists && searchResult.artists.items">
   <h2 class="page-header col-md-12" style="margin-left: 15px; margin-bottom: 20px;">Artistas</h2>
-  <div class="media col-md-4" *ngFor="let item of searchResult.artists.items">
+  <div class="" *ngFor="let item of searchResult.artists.items" style="margin-bottom: 20px;">
     <div class="media-left">
       <a href="#">
-      <img class="media-object" style="width: 170px; height: 170px; margin-left: 15px;" src="{{item.images && item.images.length > 0 ? item.images[0].url : '/assets/img/default-image-artist.png'}}" alt="Card image cap">
+      <img class="media-object" style="width: 140px; height: 140px; margin-left: 15px;" src="{{item.images && item.images.length > 0 ? item.images[0].url : '/assets/img/default-image-artist.png'}}" alt="Card image cap">
       </a>
   </div>
   <div class="media-body">
@@ -64,6 +64,10 @@
   </div>
   </div>
  </div>
+
+ 
+
+
 
 
 
