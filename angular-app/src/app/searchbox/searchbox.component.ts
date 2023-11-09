@@ -38,19 +38,21 @@ export class SearchboxComponent implements OnInit {
 
 
   async searchMusic() {
-    const searchStr = this.searchForm.get('searchStr')?.value;
-    
-    
+
+    this.router.navigate(['/loading-spinner'])
+    const searchStr = this.searchForm.get('searchStr')?.value;    
 
     if(this.searchType == 'Artistas')
     {
-      this.searchResult = await this.spotifyService.asyncCallSearchItem(searchStr, "artist");
       this.router.navigate(['/search-result-artist'])
+      this.searchResult = await this.spotifyService.asyncCallSearchItem(searchStr, "artist");
+      
     }
     else if(this.searchType == 'Canciones')
     {
-      this.searchResult = await this.spotifyService.asyncCallSearchItem(searchStr, "track");
       this.router.navigate(['/search-result-song'])
+      this.searchResult = await this.spotifyService.asyncCallSearchItem(searchStr, "track");
+      
     }
 
     this.data.changeResult(this.searchResult);
