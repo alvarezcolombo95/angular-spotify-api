@@ -1,5 +1,11 @@
-<div class="container">
+<div *ngIf="!!this.sesionIniciada(); else sesionNoIniciada" class="container">
     <button (click)="previous()" class="btn">Previous song</button>
     <button (click)="playpause()" class="btn">Play/Pause</button>
     <button (click)="next()" class="btn">Next song</button>
 </div>
+
+<ng-template #sesionNoIniciada>
+    <div class="container">
+        <h2>Debe iniciar sesión primero</h2>
+    </div>
+</ng-template>
