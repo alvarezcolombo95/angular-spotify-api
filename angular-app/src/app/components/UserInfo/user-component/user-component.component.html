@@ -1,1 +1,9 @@
-<p>user-component works!</p>
+<div *ngIf="!!this.isLoged(); else sesionNoIniciada" class="container">
+    <h1>User works!</h1>
+</div>
+
+<ng-template #sesionNoIniciada>
+    <div class="container">
+        <h2>Debe iniciar sesión primero</h2>
+    </div>
+</ng-template>
