@@ -40,19 +40,28 @@
 </div>
 -->
 
- <div *ngIf="searchResult && searchResult.tracks && searchResult.tracks.items" style="max-width: 740px;">
+ <div *ngIf="searchResult && searchResult.tracks && searchResult.tracks.items" style="max-width: 740px; ">
     <h2 class="page-header" style="margin-left: 15px; margin-bottom: 20px;">Canciones</h2>
-    <div class="media" *ngFor="let item of searchResult.tracks.items">
-    <div class="media-left">
-        <a href="#">
-        <img class="media-object" style="width: 64px; height: 64px; margin-left: 15px;" src="{{item.album.images && item.album.images.length > 0 ? item.album.images[0].url : '/assets/img/default-image-song.png'}}" alt="Card image cap">
-        </a>
-    </div>
-    <div class="media-body">
-        <h4 class="media-heading">{{item.name}}</h4>
-        <span *ngFor="let artist of item.artists ; let isLast=last " class="card-text"><span class="">{{artist.name}}{{isLast ? '' : ', '}}</span></span>
-        <p class="card-text"><small class="text-muted">{{item.album.name}}</small></p>
-    </div>
-    </div>
+    <div style="height: 80vh; overflow-y: auto;">
+        <div class="media" *ngFor="let item of searchResult.tracks.items">
+            <div class="media-left">
+                <a href="#">
+                <img class="media-object" style="width: 64px; height: 64px; margin-left: 15px;" src="{{item.album.images && item.album.images.length > 0 ? item.album.images[0].url : '/assets/img/default-image-song.png'}}" alt="Card image cap">
+                </a>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">{{item.name}}</h4>
+                <span *ngFor="let artist of item.artists ; let isLast=last " class="card-text"><span class="">{{artist.name}}{{isLast ? '' : ', '}}</span></span>
+                <p class="card-text"><small class="text-muted">{{item.album.name}}</small></p>
+            </div>
+        </div> 
+    </div> 
+    
+    <div id="fixedText" style="position: fixed; right: 25%; top: 50%; transform: translate(0%, 0%); text-align: center;">
+        <span class="glyphicon glyphicon-music text-muted"></span><br><p class="text-muted">Click en una canción para ver detalles</p>
+      </div>
+     
+
 </div>
+
 
