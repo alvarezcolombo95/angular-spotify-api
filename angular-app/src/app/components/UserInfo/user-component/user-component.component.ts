@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/UserService/user.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -8,12 +9,31 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class UserComponentComponent implements OnInit {
 
-  constructor(private loginservice: LoginService) {
+  nombreUsuario!:string ;
+
+  constructor(private loginservice: LoginService, private userservice: UserService) {
+  }
+
+  async ngOnInit() {
+    this.nombreUsuario = await this.getName();
   }
 
 
-  ngOnInit(): void {
-  }
+  //private activeUser = this.userservice.getUser();
+  async getName() {
+    try {
+      const response = await this.userservice.getUser();
+      const data = await response.json();
+      console.log(data.display_name);
+      return data.display_name;
+    } catch (error) {
+      console.error('Error:', error);
+    }
+   }
+   
+  //  console.log(await activeUser.json());
+  
+
 
   isLoged() {
     if (this.loginservice.checkLog())
@@ -21,5 +41,5 @@ export class UserComponentComponent implements OnInit {
     else
       return 0;
   }
-
 }
+

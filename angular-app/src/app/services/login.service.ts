@@ -40,6 +40,10 @@ export class LoginService implements OnInit{
     }
   }
   public token = this.getTokenFromUrl();
+
+  getToken(){
+    return localStorage.getItem('token');
+  }
   
   logOut(){
     localStorage.setItem('token', '')
