@@ -21,18 +21,18 @@ constructor(private  playerservise: PlayerService, private loginservice: LoginSe
   public sesion = this.loginservice.checkLog();
 
 
-  getToken(){
+  getToken(){//Llevarlo al loginservice?
     return localStorage.getItem('token');
   }
 
   previous(){
-    let token = this.getToken();
+    let token = this.loginservice.getToken();
     if(!!token){
       this.playerservise.previousSong(token);
     }
   }
   playpause(){
-    let token = this.getToken();
+    let token =  this.loginservice.getToken();
     if(!!token){
     this.playerservise.playPause(token);
     }
@@ -40,7 +40,7 @@ constructor(private  playerservise: PlayerService, private loginservice: LoginSe
     
 
   next(){
-    let token = this.getToken();
+    let token = this.loginservice.getToken();;
     if(!!token){
       this.playerservise.nextSong(token);
     }
