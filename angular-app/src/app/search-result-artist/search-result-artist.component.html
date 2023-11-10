@@ -46,10 +46,10 @@
     </div>
 
   </div>
-</div>-->
+</div>
 
 <div class="row" *ngIf="searchResult && searchResult.artists && searchResult.artists.items">
-  <h2 class="page-header col-md-12" style="margin-left: 15px; margin-bottom: 20px;">Artistas</h2>
+  <h2 class="page-header" style="margin-left: 15px; margin-bottom: 20px;">Artistas</h2>
   <div class="" *ngFor="let item of searchResult.artists.items" style="margin-bottom: 20px;">
     <div class="media-left">
       <a href="#">
@@ -65,12 +65,52 @@
   </div>
  </div>
 
- 
 
+ <div *ngIf="searchResult && searchResult.artists && searchResult.artists.items">
+  <h2 class="page-header" style="margin-left: 15px; margin-bottom: 20px;">Artistas</h2>
+  <div style="height: 80vh; overflow-y: auto;">
+    <div class="col-md-3">
+      <div class="" *ngFor="let item of searchResult.artists.items" style="margin-bottom: 20px;">
+        <div class="media-left">
+          <a href="#">
+          <img class="media-object" style="width: 140px; height: 140px; margin-left: 15px;" src="{{item.images && item.images.length > 0 ? item.images[0].url : '/assets/img/default-image-artist.png'}}" alt="Card image cap">
+          </a>
+        </div>
+        <div class="media-body">
+            <h5 class="media-heading">{{item.name}}</h5>
+            <p *ngFor="let genre of item.genres | slice:0:5" class="label label-primary d-inline-block mr-3" style="margin-right: 5px;">{{genre}}</p>
+            <p class="card-text" style="margin-top: 10px;"><small class="text-muted">{{item.followers.total}} seguidores</small></p>
+            <a href="" class="btn btn-default">Ver Detalles</a>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>-->
 
+<div *ngIf="searchResult && searchResult.artists && searchResult.artists.items" style="max-width: 740px; ">
+  <h2 class="page-header" style="margin-left: 15px; margin-bottom: 20px;">Artistas</h2>
+  <div style="height: 80vh; overflow-y: auto;">
+      <div class="media" *ngFor="let item of searchResult.artists.items">
+          <div class="media-left">
+              <a href="#">
+                <img class="media-object" style="width: 140px; height: 140px; margin-left: 15px;" src="{{item.images && item.images.length > 0 ? item.images[0].url : '/assets/img/default-image-artist.png'}}" alt="Card image cap">
+              </a>
+          </div>
+          <div class="media-body">
+            <h5 class="media-heading">{{item.name}}</h5>
+            <p *ngFor="let genre of item.genres | slice:0:5" class="label label-primary d-inline-block mr-3" style="margin-right: 5px;">{{genre}}</p>
+            <p class="card-text" style="margin-top: 10px;"><small class="text-muted">{{item.followers.total}} seguidores</small></p>
+            <a href="" class="btn btn-default">Ver Detalles</a>
+          </div>
+      </div> 
+  </div> 
+  
+  <div id="fixedText" style="position: fixed; right: 25%; top: 50%; transform: translate(0%, 0%); text-align: center;">
+      <span class="glyphicon glyphicon-music text-muted"></span><br><p class="text-muted">Click en una canción para ver detalles</p>
+    </div>
+   
 
-
-
+</div>
  
 
 
