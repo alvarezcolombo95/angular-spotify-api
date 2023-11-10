@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from 'src/app/services/PlayerService/player.service';
+import { LoginService } from 'src/app/services/login.service';
 
 
 @Component({
@@ -10,13 +11,16 @@ import { PlayerService } from 'src/app/services/PlayerService/player.service';
 
 export class PlayerComponent implements OnInit{
 
-constructor(private  playerservise: PlayerService){}
+constructor(private  playerservise: PlayerService, private loginservice: LoginService){}
 
 
   ngOnInit(): void {
+    
   }
   
-  
+  public sesion = this.loginservice.checkLog();
+
+
   getToken(){
     return localStorage.getItem('token');
   }
@@ -43,13 +47,10 @@ constructor(private  playerservise: PlayerService){}
 
 }
   sesionIniciada() {
-    let tk = localStorage.getItem('token');
-    if (!!tk) {
-      console.log('Sesion iniciada')
+    if (!!this.loginservice.checkLog()) {
       return 1;
     }
     else {
-      console.log('Debe iniciar sesion')
       //alert('Debe iniciar sesion primero');
       return 0;
     }

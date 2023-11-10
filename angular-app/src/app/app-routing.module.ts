@@ -9,7 +9,7 @@ import { SearchResultArtistComponent } from './search-result-artist/search-resul
 import { SearchResultSongComponent } from './search-result-song/search-result-song.component';
 import { PlayerComponent } from './components/playerComponent/player/player.component';
 import { logGuard } from './services/log-guard.guard';
-
+import { UserComponentComponent } from './components/UserInfo/user-component/user-component.component';
 
 
 
@@ -21,6 +21,7 @@ const routes: Routes = [
   {path: 'search-result-song', component: SearchResultSongComponent},
   {path: 'player', component: PlayerComponent},
   {path: 'protected', component: PlayerComponent, canActivate: [logGuard]},
+  {path: 'user', component: UserComponentComponent},
   {path: '**', component: LandingComponent },
   {path: '', component: LandingComponent }
   
