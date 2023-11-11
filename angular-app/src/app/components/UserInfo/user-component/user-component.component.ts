@@ -10,12 +10,18 @@ import { LoginService } from 'src/app/services/login.service';
 export class UserComponentComponent implements OnInit {
 
   nombreUsuario!:string ;
+  profilePicUrl!: string;
+  followers!: string;
+  recentItems!: Array<JSON>
 
   constructor(private loginservice: LoginService, private userservice: UserService) {
   }
 
   async ngOnInit() {
     this.nombreUsuario = await this.getName();
+    this.profilePicUrl = await this.getProfilePic();
+    this.followers = await this.getFollowers();
+    this.recentItems = await this.getRecentItems();
   }
 
 
@@ -24,15 +30,46 @@ export class UserComponentComponent implements OnInit {
     try {
       const response = await this.userservice.getUser();
       const data = await response.json();
+      console.log(data);
       console.log(data.display_name);
       return data.display_name;
     } catch (error) {
       console.error('Error:', error);
     }
    }
+
+   async getRecentItems(){
+    try {
+      const response = await this.userservice.recentItems();
+      const data = await response.json();
+      console.log(data.items);
+      return data.display_name;
+    } catch (error) {
+      console.error('Error:', error);
+    }
+   }
    
-  //  console.log(await activeUser.json());
-  
+   
+  async getProfilePic(){
+    try{const response = await this.userservice.getUser();
+      const data = await response.json();
+      console.log(data.images[1].url);
+      return data.images[1].url;
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
+  async getFollowers(){
+    try{const response = await this.userservice.getUser();
+      const data = await response.json();
+      console.log(data.followers.total);
+      return data.followers.total;
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
 
 
   isLoged() {
