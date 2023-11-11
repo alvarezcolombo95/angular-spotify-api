@@ -1,9 +1,16 @@
 
-<div *ngIf="!!this.sesionIniciada(); else sesionNoIniciada" class="container">
-    <button (click)="previous()" class="btn">Previous song</button>
-    <button (click)="playpause()" class="btn">Play/Pause</button>
-    <button (click)="next()" class="btn">Next song</button>
+<div *ngIf="!!this.sesionIniciada(); else sesionNoIniciada" class="text-center container">
+    <div class="flex gap-3">
+        <div class="p-2 g-col-6">
+            <button (click)="previous()" class="btn btn-primary btn-lg">Previous song</button></div>
+        <div class="p-2 g-col-6">
+            <button (click)="playpause()" class="btn btn-primary btn-lg">Play/Pause</button></div>
+        <div class="p-2 g-col-6">
+            <button (click)="next()" class="btn btn-primary btn-lg">Next song</button></div>
+      </div>
 </div>
+
+
 
 <ng-template #sesionNoIniciada>
     <div class="container">
