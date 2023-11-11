@@ -14,6 +14,9 @@ export class SearchResultArtistComponent implements OnInit {
   searchResult: any = null;
   private subscription?: Subscription;
 
+  displayDetails: boolean = false;
+  idDetails: string = ''
+
   constructor(private data: SearchCommService) {}
 
   ngOnInit(): void {
@@ -27,6 +30,12 @@ export class SearchResultArtistComponent implements OnInit {
       })
     ).subscribe(searchResult => this.searchResult = searchResult);
     /*this.data.currentResult.subscribe(searchResult => this.searchResult = searchResult)*/
+  }
+
+  viewDetails(id: string)
+  {
+    this.idDetails = id;
+    this.displayDetails = true;
   }
 
   
