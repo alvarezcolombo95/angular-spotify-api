@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from 'src/app/services/PlayerService/player.service';
+import { LoginService } from 'src/app/services/login.service';
 
 
 @Component({
@@ -10,25 +11,28 @@ import { PlayerService } from 'src/app/services/PlayerService/player.service';
 
 export class PlayerComponent implements OnInit{
 
-constructor(private  playerservise: PlayerService){}
+constructor(private  playerservise: PlayerService, private loginservice: LoginService){}
 
 
   ngOnInit(): void {
+    
   }
   
-  
-  getToken(){
+  public sesion = this.loginservice.checkLog();
+
+
+  getToken(){//Llevarlo al loginservice?
     return localStorage.getItem('token');
   }
 
   previous(){
-    let token = this.getToken();
+    let token = this.loginservice.getToken();
     if(!!token){
       this.playerservise.previousSong(token);
     }
   }
   playpause(){
-    let token = this.getToken();
+    let token =  this.loginservice.getToken();
     if(!!token){
     this.playerservise.playPause(token);
     }
@@ -36,36 +40,19 @@ constructor(private  playerservise: PlayerService){}
     
 
   next(){
-    let token = this.getToken();
+    let token = this.loginservice.getToken();;
     if(!!token){
       this.playerservise.nextSong(token);
     }
-  // }
-  // tokenVerify() {
-  //   if (!this.sesionIniciada()) {
-  //     let tk = this.loginservice.getTokenFromUrl(); // Si no esta inicciada la sesion, lo hago
-  //     localStorage.setItem('token', tk) //guardo el token
-  //     console.log(tk)
-  //   }
-  // }
-  
-  // sesionIniciada() {
-  //   let tk = localStorage.getItem('token');
-  //   if (!!tk) {
-  //     // console.log(tkn);
-  //     console.log('Sesion iniciada')
-  //     //this.loginservice.reproducir(tk);
-  //     return 1;
-  //   }
-  //   else {
-  //     console.log('Debe iniciar sesion')
-  //     return 0;
-  //   }
-  // }
 
-  
-  
- 
-
-
-}}
+}
+  sesionIniciada() {
+    if (!!this.loginservice.checkLog()) {
+      return 1;
+    }
+    else {
+      //alert('Debe iniciar sesion primero');
+      return 0;
+    }
+  }
+}

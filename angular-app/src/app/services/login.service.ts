@@ -1,15 +1,16 @@
 import { Injectable, OnInit } from '@angular/core';
 import { SpotifyConfiguration } from 'src/environments/environment';
 import { DevicesService } from './devices.service';
+import { Token } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class LoginService implements OnInit{
-  private isloged: boolean = false;
 
-  constructor(private deviceservice: DevicesService) { }
+
+  constructor() { }
   ngOnInit(): void {
   }
 
@@ -35,18 +36,21 @@ export class LoginService implements OnInit{
       console.log('se encontro un token')
       const params = window.location.hash.substring(1).split('&');   //Separo el token y sus atributos
       let token = params[0].split('=')[1];
-      this.isloged=true;
       return  token// Retorno el token especificamente
     }
   }
   public token = this.getTokenFromUrl();
+
+  getToken(){
+    return localStorage.getItem('token');
+  }
   
   logOut(){
-    this.isloged=false;
+    localStorage.setItem('token', '')
   }
 
   checkLog(){
-    return this.isloged;
+    return !!localStorage.getItem('token'); //No controla si el token esta desactualizado
   }
   
    
