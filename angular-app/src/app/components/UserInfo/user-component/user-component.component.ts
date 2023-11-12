@@ -8,11 +8,11 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./user-component.component.css']
 })
 export class UserComponentComponent implements OnInit {
-
+  
   nombreUsuario!:string ;
   profilePicUrl!: string;
   followers!: string;
-  recentItems!: Array<JSON>
+  recentItems = [];
 
   constructor(private loginservice: LoginService, private userservice: UserService) {
   }
@@ -43,7 +43,7 @@ export class UserComponentComponent implements OnInit {
       const response = await this.userservice.recentItems();
       const data = await response.json();
       console.log(data.items);
-      return data.display_name;
+      return data.items;
     } catch (error) {
       console.error('Error:', error);
     }

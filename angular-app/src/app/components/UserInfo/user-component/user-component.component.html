@@ -1,13 +1,14 @@
-<div *ngIf="!!this.isLoged(); else sesionNoIniciada" class="container row">
-    <div class="col-lg-6"> <img [src]="profilePicUrl" alt="User Profile Picture">
+<div *ngIf="!!this.isLoged(); else sesionNoIniciada" class="container info">
+    <div class="col-1 borde"> <img [src]="profilePicUrl" alt="User Profile Picture">
         <div class="profile-info">
-            <h2 >{{nombreUsuario}}</h2>
+            <h2 style="font-size: 50px; font-weight: bold;">{{nombreUsuario}}</h2>
             <h6>Followers: {{followers}}</h6>
         </div>
     </div>
-    <div class="recent col-lg-6">
-        <h3>Esto es lo que haz estado escuchando!</h3>
-        <div class="itemList">{{recentItems}}</div>
+    <div class="recent col-2 borde">
+        <h2>Esto es lo que haz estado escuchando!</h2>
+        <!-- <div class="itemList">{{recentItems}}</div> -->
+        <app-track *ngFor="let track of recentItems"[track]="track"></app-track>
     </div>
 </div>
 
