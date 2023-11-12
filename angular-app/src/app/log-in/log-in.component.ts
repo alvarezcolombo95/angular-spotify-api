@@ -11,33 +11,25 @@ export class LogInComponent implements OnInit {
 
   constructor(private loginService: LoginService, private playerservice: PlayerService) {
 
-    
+
   }
   ngOnInit(): void {
-    //this.tokenVerify();
-    let token = this.loginService.token
-    localStorage.setItem('token',token)
+    this.sesionIniciada();
     console.log(localStorage.getItem('token'))
-  }
-
-  tokenVerify() {
-    if (!this.sesionIniciada()) {
-      let tkn = this.loginService.token; //this.loginService.getTokenFromUrl(); // Si no esta inicciada la sesion, lo hago
-      localStorage.setItem('token', tkn) //guardo el token
-      console.log(tkn)
-    }
   }
 
   sesionIniciada() {
     const token = this.loginService.token;
     if (!!token) {
       // console.log(tkn);
-      console.log('Sesion iniciada')
-      this.playerservice.playPause(token);
+      console.log('Sesion iniciada');
+      let tkn = this.loginService.token;
+      localStorage.setItem('token', tkn);//Actualizo el token
+      console.log(tkn);
       return 1;
     }
     else {
-      console.log('Debe iniciar sesion')
+      console.log('No hay nuevo token')
       return 0;
     }
   }
@@ -47,8 +39,8 @@ export class LogInComponent implements OnInit {
   whenCLick() {
     window.location.href = this.loginService.getUrlLogin();
   }
-  logout(){
-      this.loginService.logOut();
+  logout() {
+    this.loginService.logOut();
   }
 
 }

@@ -1,0 +1,11 @@
+<div *ngIf="!!this.isLoged(); else sesionNoIniciada" class="container">
+    <div> <img src="" alt="User Profile Picture">
+        <h2 >{{nombreUsuario}}</h2>
+    </div>
+</div>
+
+<ng-template #sesionNoIniciada>
+    <div class="container">
+        <h2>Debe iniciar sesión primero</h2>
+    </div>
+</ng-template>
