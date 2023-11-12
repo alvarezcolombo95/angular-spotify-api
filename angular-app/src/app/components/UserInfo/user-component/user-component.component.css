@@ -1,14 +1,23 @@
 img{
+    height: 300px;
+    width: 300px;
     border-radius: 150px;
     float: left;
     margin-right: 20px;
-    margin-left: 10px;
+    margin-left: 0px;
 }
+
+/* .info{
+    display: flex;
+} */
 .profile-info{
-    position: absolute;
-    top: 50%;
-    left: 350px;
-    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    margin-top: 15%;
+    margin-right: 0px;
+    font-size: 30px;
+    font-weight: bold !important;
+       
 }
 
 .container{
@@ -16,6 +25,18 @@ img{
     padding-top: 20px;
     position: relative;
     margin-left: 0%;
+    width: 100%;
+    gap: 5px;
+}
+.borde{
+    border: 5px solid #181515;
+    border-radius: 28px;
+}
+.col-1{
+    width: 50%;
+}
+.col-2{
+    width: 50%;
 }
 
 .recent{
