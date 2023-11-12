@@ -1,6 +1,14 @@
 <div class="caja ">
-    <h4>{{ track.name }}</h4>
-    <!-- Artista -->
-    <!-- s<img [src]="track.img" alt="{{ track.name }} image"> -->
+    <!-- <h4>{{ track.name }}</h4> -->
+    <div class="media-left">
+        <a href="#">
+        <img class="media-object" style="width: 64px; height: 64px; margin-left: 15px;" src="{{track.album.images && track.album.images.length > 0 ? track.album.images[0].url : '/assets/img/default-image-song.png'}}" alt="Card image cap">
+        </a>
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading">{{track.name}}</h4>
+        <span *ngFor="let artist of track.artists ; let isLast=last " class="card-text"><span class="">{{artist.name}}{{isLast ? '' : ', '}}</span></span>
+        <p class="card-text"><small class="text-muted">{{track.album.name}}</small></p>
+    </div>
 </div>
    

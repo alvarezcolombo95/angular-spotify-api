@@ -7,8 +7,7 @@
     </div>
     <div class="recent col-2 borde">
         <h2>Esto es lo que haz estado escuchando!</h2>
-        <!-- <div class="itemList">{{recentItems}}</div> -->
-        <app-track *ngFor="let track of recentItems"[track]="track"></app-track>
+        <app-track class ="media" *ngFor="let track of recentItems"[track]="track"></app-track>
     </div>
 </div>
 

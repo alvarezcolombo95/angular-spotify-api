@@ -42,6 +42,7 @@
 
  <div *ngIf="searchResult && searchResult.tracks && searchResult.tracks.items" style="max-width: 740px;">
     <h2 class="page-header" style="margin-left: 15px; margin-bottom: 20px;">Canciones</h2>
+    
     <div class="media" *ngFor="let item of searchResult.tracks.items">
     <div class="media-left">
         <a href="#">
