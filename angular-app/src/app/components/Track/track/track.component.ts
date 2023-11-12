@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./track.component.css']
 })
 export class TrackComponent {
-  @Input() track: any;
+  @Input() track: any
 }
