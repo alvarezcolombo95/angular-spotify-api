@@ -17,6 +17,7 @@ import { SearchResultSongComponent } from './search-result-song/search-result-so
 import { DetailArtistComponent } from './detail-artist/detail-artist.component';
 import { PlayerComponent } from './components/playerComponent/player/player.component';
 import { UserComponentComponent } from './components/UserInfo/user-component/user-component.component';
+import { TrackComponent } from './components/Track/track/track.component';
 import { DetailSongComponent } from './detail-song/detail-song.component';
 
 @NgModule({
@@ -35,6 +36,7 @@ import { DetailSongComponent } from './detail-song/detail-song.component';
     DetailArtistComponent,
     PlayerComponent,
     UserComponentComponent,
+    TrackComponent,
     DetailSongComponent
   ],
   imports: [

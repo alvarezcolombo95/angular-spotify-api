@@ -16,4 +16,12 @@ export class UserService {
     });
   }
 
+  async recentItems(){
+    return await fetch('https://api.spotify.com/v1/me/top/tracks?time_range=short_term', {
+  headers: {
+    'Authorization': `Bearer ${this.loginservice.getToken()}`
+  }
+});
+   }
+
 }
