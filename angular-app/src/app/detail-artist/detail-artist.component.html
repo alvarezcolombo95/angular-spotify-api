@@ -2,37 +2,41 @@
     Parte superior
 -->
 
+<div class="container">
 
-<div class="row" style="position: fixed; right: 25%; top: 50%; transform: translate(0%, 0%); text-align: center;">
-  <div class="col-md-12">
-    <div class="media">
-      <div class="media-left media-middle">
-        <a href="#">
-          <img class="media-object" style="width: 250px; height: 250px;" src="{{artistResult.images[0].url}}" alt="...">
-        </a>
-      </div>
+  <div class="container-top">
+    <div class="media borde margin-cont">
+      <div class="media-left"> <a href="#"> <img alt="" class="media-object"
+            style="width: 200px; height: 200px;"
+            src="{{artistResult.images[0].url}}"
+            > </a> </div>
       <div class="media-body">
-        <h4 class="media-heading">{{artistResult.name}}</h4>
-        ID: {{id}}
-        Popularidad: {{artistResult.popularity}}
+        <h4 class="media-heading" style="font-size: 60px; margin-bottom: 15px; margin-top: 15px;">{{artistResult.name}}</h4>
+        <p *ngFor="let genre of artistResult.genres | slice:0:5" class="label label-primary d-inline-block mr-3" style="margin-right: 5px; font-size: larger;">{{genre}}</p>
+        <p style="margin-top: 15px; font-size: larger;">{{artistResult.followers.total}} Seguidores</p>
+        <p style="font-size: larger;">Popularidad: {{artistResult.popularity}}</p>      
       </div>
+  </div>
+
+  <div class="container-bottom">
+    <div class="container-bottom-left borde margin-cont">
+      <h3>Albumes</h3>
+      <p>Texto texto bla bla bla bla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla bla</p>
+    </div>  
+    <div class="container-bottom-right borde margin-cont">
+      <h3>Artistas relacionados</h3>
+      <p>Texto texto bla bla bla bla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla bla</p>
     </div>
   </div>
-  <div class="col-md-12">
-    <div class="media">
-      <div class="media-left media-middle">
-        <a href="#">
-          <img class="media-object" style="width: 250px; height: 250px;" src="{{artistResult.images[0].url}}" alt="...">
-        </a>
-      </div>
-      <div class="media-body">
-        <h4 class="media-heading">{{artistResult.name}}</h4>
-        ID: {{id}}
-        Popularidad: {{artistResult.popularity}}
-      </div>
-    </div>
-  </div>
- </div>
+  
+  
+</div>
+  
+  
+
+  
+  
+</div>
 
 <!--
 -->
