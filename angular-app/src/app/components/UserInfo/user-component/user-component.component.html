@@ -1,8 +1,13 @@
 <div *ngIf="!!this.isLoged(); else sesionNoIniciada" class="container info">
-    <div class="col-1 borde"> <img [src]="profilePicUrl" alt="User Profile Picture">
+    <div class="col-1 borde">
+        <img [src]="profilePicUrl" alt="User Profile Picture">
         <div class="profile-info">
             <h2 style="font-size: 50px; font-weight: bold;">{{nombreUsuario}}</h2>
             <h6>Followers: {{followers}}</h6>
+        </div>
+        <div class="create">
+            <p>Si te gusta lo que has estado escuchando, crea una playlist y guardalo en tu biblioteca</p>
+            <button *ngIf="showType==='Canciones'" (click)="createPlaylist()" class="btn btn-create">Crear Playlist</button>
         </div>
     </div>
     <div class="recent col-2 borde">
@@ -11,14 +16,17 @@
         <button type="button" (click)="toggleShowType()" class="btn btn-default">
             {{showType}}
         </button>
+        <button class="btn btn-default" (click)="toggleTermType()">
+            {{termType}}
+        </button>
         <br><br>
         <ng-container *ngIf="showType==='Canciones'">
             <app-track class="media" *ngFor="let item of recentItems" [track]="item"></app-track>
         </ng-container>
         <ng-container *ngIf="showType==='Artistas'">
-            <app-artist class="media" *ngFor="let item of recentItems" [artist]="item"></app-artist>
+            <app-artist class="media" *ngFor="let item of recentArtists" [artist]="item"></app-artist>
         </ng-container>
-        
+
     </div>
 </div>
 
