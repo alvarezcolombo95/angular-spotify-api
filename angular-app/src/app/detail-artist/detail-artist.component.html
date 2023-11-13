@@ -5,7 +5,7 @@
 <div class="container">
 
   <div class="container-top">
-    <div class="media borde margin-cont">
+    <div *ngIf="artistResult" class="media  margin-cont">
       <div class="media-left"> <a href="#"> <img alt="" class="media-object"
             style="width: 200px; height: 200px;"
             src="{{artistResult.images[0].url}}"
@@ -16,29 +16,41 @@
         <p style="margin-top: 15px; font-size: larger;">{{artistResult.followers.total}} Seguidores</p>
         <p style="font-size: larger;">Popularidad: {{artistResult.popularity}}</p>      
       </div>
-  </div>
-
-  <div class="container-bottom">
-    <div class="container-bottom-left borde margin-cont">
-      <h3>Albumes</h3>
-      <p>Texto texto bla bla bla bla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla bla</p>
-    </div>  
-    <div class="container-bottom-right borde margin-cont">
-      <h3>Artistas relacionados</h3>
-      <p>Texto texto bla bla bla bla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla bla</p>
     </div>
   </div>
-  
-  
-</div>
-  
-  
 
   
-  
+  <div class="container-bottom">
+    <div class="container-bottom-left  margin-cont">
+      <h3>Canciones Mas Escuchadas</h3>
+      <div *ngIf="topTracksResult">
+        <div class="media" *ngFor="let item of tracks | slice:0:5">
+          <div class="media-left">
+              <a href="#">
+              <img class="media-object" style="width: 64px; height: 64px; margin-left: 15px;" src="{{item.album.images && item.album.images.length > 0 ? item.album.images[0].url : '/assets/img/default-image-song.png'}}" alt="Card image cap">
+              </a>
+          </div>
+          <div class="media-body">
+              <h4 class="media-heading">{{item.name}}</h4>
+              <p class="card-text"><small class="text-muted">{{item.album.name}}</small></p>
+          </div>
+        </div> 
+      </div>        
+    </div>
+
+    <div class="container-bottom-right  margin-cont">
+      <h3>Artistas Relacionados</h3>
+      <p>Texto texto bla bla bla bla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla bla</p>
+    </div>
+
+  </div>
+
+    
 </div>
 
 <!--
+
+  
 -->
 
 <!--

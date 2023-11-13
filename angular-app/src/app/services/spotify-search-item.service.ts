@@ -112,6 +112,43 @@ export class SpotifySearchItemService {
     
       });
     }
+
+    ///////////////////////////////////////////////////////////
+
+    async asyncCallGetTopTracks(input: string) {
+      console.log('Pidiendo');
+      try {
+        const res = await this.getTopTracks(input);
+        console.log('respuesta JSON:');
+        console.log(res);
+        return res;
+      } catch (error) {
+        console.log(error);
+        return error;
+      };
+    }
+    
+    getTopTracks(input: string) {
+      return new Promise(async (resolve, reject) => {
+        const data =null;
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://api.spotify.com/v1/artists/' + input + '/top-tracks?market=AR');
+        xhr.setRequestHeader('Authorization', `Bearer ${await this.GetToken()}`);
+    
+        xhr.onload = function () { 
+                if (xhr.status == 200) {
+                    console.log('respuesta del servidor o API Pedido Get Top Tracks');
+                    let data = JSON.parse(this.response);
+                    resolve(data);
+                } else {
+                    reject(new Error('error en la conexion'));
+                }
+            };
+    
+            xhr.send(data); 
+    
+      });
+    }
     
 }
 

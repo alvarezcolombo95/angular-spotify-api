@@ -11,6 +11,8 @@ export class DetailArtistComponent{
 
     @Input() id: string = '';
     artistResult: any = null;
+    topTracksResult: any = null;
+    tracks!: any[];
 
     constructor(private spotifyService: SpotifySearchItemService) {
         
@@ -29,7 +31,7 @@ export class DetailArtistComponent{
     async callService()
     {
         this.artistResult = await this.spotifyService.asyncCallGetArtist(this.id);
-        console.log("funcion test")
-        console.log(this.artistResult)
+        this.topTracksResult = await this.spotifyService.asyncCallGetTopTracks(this.id)
+        this.tracks = this.topTracksResult.tracks
     }
 }
