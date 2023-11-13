@@ -5,9 +5,9 @@
             <h2 style="font-size: 50px; font-weight: bold;">{{nombreUsuario}}</h2>
             <h6>Followers: {{followers}}</h6>
         </div>
-        <div class="create">
+        <div *ngIf="showType==='Canciones'" class="create">
             <p>Si te gusta lo que has estado escuchando, crea una playlist y guardalo en tu biblioteca</p>
-            <button *ngIf="showType==='Canciones'" (click)="createPlaylist()" class="btn btn-create">Crear Playlist</button>
+            <button  (click)="createPlaylist()" class="btn btn-create">Crear Playlist</button>
         </div>
     </div>
     <div class="recent col-2 borde">
