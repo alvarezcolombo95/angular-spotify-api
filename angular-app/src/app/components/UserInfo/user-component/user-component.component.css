@@ -6,10 +6,36 @@ img{
     margin-right: 20px;
     margin-left: 0px;
 }
+.btn{
+    margin: 10px;
+}
+.btn-create{
+    background-color: #1db954;
+    color: #191414;
+    border: none;
+    border-radius: 20px;
+}
 
-/* .info{
+.btn-create:hover {
+    background-color: #199a46; 
+   }
+.btn-create:focus {
+    background-color: #199a46; 
+   }
+.btn-create:active {
+    background-color: #FFFFFF; 
+    color: #191414;
+    transition-duration: 0.5s;
+   }
+.create{
+    position: relative;
+    top: 100px;
     display: flex;
-} */
+    text-align: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
 .profile-info{
     display: flex;
     flex-direction: column;

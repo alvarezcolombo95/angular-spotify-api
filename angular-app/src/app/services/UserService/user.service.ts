@@ -16,6 +16,7 @@ export class UserService {
     });
   }
 
+
   async recentItems(type:string,term:string){
     return await fetch(`https://api.spotify.com/v1/me/top/${type}?time_range=${term}`, {
   headers: {
