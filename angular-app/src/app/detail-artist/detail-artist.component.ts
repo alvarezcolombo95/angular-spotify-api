@@ -14,6 +14,9 @@ export class DetailArtistComponent{
     topTracksResult: any = null;
     tracks!: any[];
 
+    relatedArtistsResult: any = null;
+    related!: any[];
+
     constructor(private spotifyService: SpotifySearchItemService) {
         
     }
@@ -32,6 +35,11 @@ export class DetailArtistComponent{
     {
         this.artistResult = await this.spotifyService.asyncCallGetArtist(this.id);
         this.topTracksResult = await this.spotifyService.asyncCallGetTopTracks(this.id)
-        this.tracks = this.topTracksResult.tracks
+        this.tracks = this.topTracksResult.tracks;
+
+        this.relatedArtistsResult = await this.spotifyService.asyncCallGetRelatedArtists(this.id)
+        this.related = this.relatedArtistsResult.artists;
     }
+
+    
 }

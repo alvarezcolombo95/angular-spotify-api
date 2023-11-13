@@ -14,7 +14,8 @@
         <h4 class="media-heading" style="font-size: 60px; margin-bottom: 15px; margin-top: 15px;">{{artistResult.name}}</h4>
         <p *ngFor="let genre of artistResult.genres | slice:0:5" class="label label-primary d-inline-block mr-3" style="margin-right: 5px; font-size: larger;">{{genre}}</p>
         <p style="margin-top: 15px; font-size: larger;">{{artistResult.followers.total}} Seguidores</p>
-        <p style="font-size: larger;">Popularidad: {{artistResult.popularity}}</p>      
+        <p style="font-size: larger;">Popularidad: {{artistResult.popularity}}</p>
+              
       </div>
     </div>
   </div>
@@ -27,12 +28,21 @@
         <div class="media" *ngFor="let item of tracks | slice:0:5">
           <div class="media-left">
               <a href="#">
-              <img class="media-object" style="width: 64px; height: 64px; margin-left: 15px;" src="{{item.album.images && item.album.images.length > 0 ? item.album.images[0].url : '/assets/img/default-image-song.png'}}" alt="Card image cap">
+              <img class="media-object" style="width: 95px; height: 95px; margin-left: 15px;" src="{{item.album.images && item.album.images.length > 0 ? item.album.images[0].url : '/assets/img/default-image-song.png'}}" alt="Card image cap">
               </a>
           </div>
           <div class="media-body">
-              <h4 class="media-heading">{{item.name}}</h4>
+              <h4 class="media-heading" 
+              style="font-size: medium; text-overflow: ellipsis;
+              width: 340px;
+              overflow: hidden;
+              white-space: nowrap;">
+              {{item.name}}</h4>
               <p class="card-text"><small class="text-muted">{{item.album.name}}</small></p>
+              <audio style="width: 75%;" id="audio-player" controls>
+                <source src="{{item.preview_url}}" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
           </div>
         </div> 
       </div>        
@@ -40,7 +50,19 @@
 
     <div class="container-bottom-right  margin-cont">
       <h3>Artistas Relacionados</h3>
-      <p>Texto texto bla bla bla bla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla bla</p>
+      <div *ngIf="relatedArtistsResult">
+        <div class="media" *ngFor="let item of related | slice:0:5">
+          <div class="media-left">
+              <a href="#">
+              <img class="media-object" style="width: 95px; height: 95px; margin-left: 15px;" src="{{item.images && item.images.length > 0 ? item.images[0].url : '/assets/img/default-image-song.png'}}" alt="Card image cap">
+              </a>
+          </div>
+          <div class="media-body">
+              <h4 class="media-heading">{{item.name}}</h4>
+              <p *ngFor="let genre of item.genres | slice:0:5" class="label label-primary d-inline-block mr-3" style="margin-right: 5px;">{{genre}}</p>
+          </div>
+        </div> 
+      </div>
     </div>
 
   </div>
