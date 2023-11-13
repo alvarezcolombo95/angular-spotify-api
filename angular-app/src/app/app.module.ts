@@ -19,6 +19,7 @@ import { PlayerComponent } from './components/playerComponent/player/player.comp
 import { UserComponentComponent } from './components/UserInfo/user-component/user-component.component';
 import { TrackComponent } from './components/Track/track/track.component';
 import { DetailSongComponent } from './detail-song/detail-song.component';
+import { ArtistComponent } from './components/artist/artist/artist.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DetailSongComponent } from './detail-song/detail-song.component';
     PlayerComponent,
     UserComponentComponent,
     TrackComponent,
-    DetailSongComponent
+    DetailSongComponent,
+    ArtistComponent
   ],
   imports: [
     BrowserModule,
