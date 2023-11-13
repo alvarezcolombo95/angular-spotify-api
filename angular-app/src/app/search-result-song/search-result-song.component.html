@@ -46,20 +46,24 @@
         <div class="media" *ngFor="let item of searchResult.tracks.items">
             <div class="media-left">
                 <a href="#">
-                <img class="media-object" style="width: 64px; height: 64px; margin-left: 15px;" src="{{item.album.images && item.album.images.length > 0 ? item.album.images[0].url : '/assets/img/default-image-song.png'}}" alt="Card image cap">
+                <img class="media-object" style="width: 110px; height: 110px; margin-left: 15px;" src="{{item.album.images && item.album.images.length > 0 ? item.album.images[0].url : '/assets/img/default-image-song.png'}}" alt="Card image cap">
                 </a>
             </div>
             <div class="media-body">
                 <h4 class="media-heading">{{item.name}}</h4>
                 <span *ngFor="let artist of item.artists ; let isLast=last " class="card-text"><span class="">{{artist.name}}{{isLast ? '' : ', '}}</span></span>
                 <p class="card-text"><small class="text-muted">{{item.album.name}}</small></p>
+                <button style="font-size: smaller; padding: 5px;" type="button" class="btn btn-default" (click)="(viewDetails(item.id))">Ver Detalles</button>
             </div>
         </div> 
     </div> 
     
-    <div id="fixedText" style="position: fixed; right: 25%; top: 50%; transform: translate(0%, 0%); text-align: center;">
+    <div *ngIf="!displayDetails" style="position: fixed; right: 25%; top: 50%; transform: translate(0%, 0%); text-align: center;">
         <span class="glyphicon glyphicon-music text-muted"></span><br><p class="text-muted">Click en una canción para ver detalles</p>
       </div>
+      <div *ngIf="displayDetails">
+        <app-detail-song [id] ="idDetails"></app-detail-song>
+      </div> 
      
 
 </div>

@@ -1,1 +1,49 @@
-<p>detail-song works!</p>
+<div class="container">
+
+    <div class="container-top">
+      <div *ngIf="trackResult" class="media  margin-cont">
+        <div class="media-left"> <a href="#"> <img alt="" class="media-object"
+              style="width: 200px; height: 200px;"
+              src="{{trackResult.album.images[0].url}}"
+              > </a> </div>
+        <div class="media-body">
+          <h4 class="media-heading" style="font-size: 60px; margin-bottom: 15px; margin-top: 15px;">{{trackResult.name}}</h4>
+          <span *ngFor="let artist of trackResult.artists ; let isLast=last " class="card-text"><span class="" style="font-size: x-large;">{{artist.name}}{{isLast ? '' : ', '}}</span></span>
+          <p>{{trackResult.album.name}}</p>
+          
+          <audio style="width: 75%;" id="audio-player" controls>
+            <source src="{{trackResult.preview_url}}" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+
+        </div>
+      </div>
+    </div>
+  
+    
+    <div class="container-bottom">
+      <h3>Recomendaciones</h3>
+      <div *ngFor="let track of recomTracks | slice:0:4" style="margin: 10px;">
+        <div class="media-left"> <a href="#"> <img alt="" class="media-object"
+            style="width: 120px; height: 120px;"
+            src="{{track.album.images[0].url}}"
+            > </a> 
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading">{{track.name}}</h4>
+            <span *ngFor="let artist of track.artists ; let isLast=last " class="card-text"><span class="">{{artist.name}}{{isLast ? '' : ', '}}</span></span>
+            <p class="card-text"><small class="text-muted">{{track.album.name}}</small></p>
+
+            <audio style="width: 75%;" id="audio-player" controls>
+                <source src="{{track.preview_url}}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>    
+        </div>
+      </div>
+
+      
+                
+
+    </div>
+      
+  </div>

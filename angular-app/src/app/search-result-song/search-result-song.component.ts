@@ -14,6 +14,9 @@ export class SearchResultSongComponent {
   searchResult: any = null;
   private subscription?: Subscription;
 
+  displayDetails: boolean = false;
+  idDetails: string = ''
+
   constructor(private data: SearchCommService) {}
 
   ngOnInit(): void {
@@ -29,8 +32,10 @@ export class SearchResultSongComponent {
     /*this.data.currentResult.subscribe(searchResult => this.searchResult = searchResult)*/
   }
 
-  funcionTest(){
-    console.log("funcionTest()")
+  viewDetails(id: string)
+  {
+    this.idDetails = id;
+    this.displayDetails = true;
   }
 
 }
