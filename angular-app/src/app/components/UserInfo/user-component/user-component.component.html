@@ -6,8 +6,19 @@
         </div>
     </div>
     <div class="recent col-2 borde">
-        <h2>Esto es lo que haz estado escuchando!</h2>
-        <app-track class ="media" *ngFor="let track of recentItems"[track]="track"></app-track>
+        <h3>Esto es lo que haz estado escuchando!</h3>
+        <br>
+        <button type="button" (click)="toggleShowType()" class="btn btn-default">
+            {{showType}}
+        </button>
+        <br><br>
+        <ng-container *ngIf="showType==='Canciones'">
+            <app-track class="media" *ngFor="let item of recentItems" [track]="item"></app-track>
+        </ng-container>
+        <ng-container *ngIf="showType==='Artistas'">
+            <app-artist class="media" *ngFor="let item of recentItems" [artist]="item"></app-artist>
+        </ng-container>
+        
     </div>
 </div>
 
