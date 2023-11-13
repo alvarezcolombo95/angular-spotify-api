@@ -16,8 +16,8 @@ export class UserService {
     });
   }
 
-  async recentItems(){
-    return await fetch('https://api.spotify.com/v1/me/top/tracks?time_range=short_term', {
+  async recentItems(type:string,term:string){
+    return await fetch(`https://api.spotify.com/v1/me/top/${type}?time_range=${term}`, {
   headers: {
     'Authorization': `Bearer ${this.loginservice.getToken()}`
   }
