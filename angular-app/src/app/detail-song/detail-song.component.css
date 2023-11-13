@@ -1,0 +1,40 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 10px;
+    margin-right: 10px;
+    position: absolute;
+    right: 0;
+    top: 6%;
+    width: 60%;
+    gap: 5px;
+}
+
+.container-top{
+    height: 50%;
+}
+
+.container-bottom{
+    height: 50%;
+}
+
+.margin-cont{
+    margin: 5px;
+ }
+
+ .borde{
+    border: 5px solid #181515;
+    border-radius: 28px;
+}
+ 
+.row-1{
+    height: 50%;
+}
+.row-2{
+    height: 50%;
+}
+
+.recent{
+    text-align: center;
+}

@@ -93,14 +93,14 @@
       <div class="media" *ngFor="let item of searchResult.artists.items">
           <div class="media-left">
               <a href="#">
-                <img class="media-object" style="width: 140px; height: 140px; margin-left: 15px;" src="{{item.images && item.images.length > 0 ? item.images[0].url : '/assets/img/default-image-artist.png'}}" alt="Card image cap">
+                <img class="media-object" style="width: 115px; height: 115px; margin-left: 15px;" src="{{item.images && item.images.length > 0 ? item.images[0].url : '/assets/img/default-image-artist.png'}}" alt="Card image cap">
               </a>
           </div>
           <div class="media-body">
             <h5 class="media-heading">{{item.name}}</h5>
             <p *ngFor="let genre of item.genres | slice:0:5" class="label label-primary d-inline-block mr-3" style="margin-right: 5px;">{{genre}}</p>
             <p class="card-text" style="margin-top: 10px;"><small class="text-muted">{{item.followers.total}} seguidores</small></p>
-            <button type="button" class="btn btn-default" (click)="(viewDetails(item.id))">Ver Detalles</button>
+            <button style="font-size: smaller; padding: 5px;" type="button" class="btn btn-default" (click)="(viewDetails(item.id))">Ver Detalles</button>
           </div>
       </div> 
   </div> 

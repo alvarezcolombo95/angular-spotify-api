@@ -17,9 +17,7 @@ export class DetailArtistComponent{
     relatedArtistsResult: any = null;
     related!: any[];
 
-    constructor(private spotifyService: SpotifySearchItemService) {
-        
-    }
+    constructor(private spotifyService: SpotifySearchItemService) {}
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes['id']) {

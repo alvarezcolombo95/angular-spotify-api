@@ -187,5 +187,80 @@ export class SpotifySearchItemService {
       });
     }
 
+
+    ////////////////////////////////////////////////////////
+
+    async asyncCallGetTrack(input: string) {
+      console.log('Pidiendo');
+      try {
+        const res = await this.getTrack(input);
+        console.log('respuesta JSON:');
+        console.log(res);
+        return res;
+      } catch (error) {
+        console.log(error);
+        return error;
+      };
+    }
+    
+    getTrack(input: string) {
+      return new Promise(async (resolve, reject) => {
+        const data =null;
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://api.spotify.com/v1/tracks/' + input);
+        xhr.setRequestHeader('Authorization', `Bearer ${await this.GetToken()}`);
+    
+        xhr.onload = function () { 
+                if (xhr.status == 200) {
+                    console.log('respuesta del servidor o API Pedido Get Track');
+                    let data = JSON.parse(this.response);
+                    resolve(data);
+                } else {
+                    reject(new Error('error en la conexion'));
+                }
+            };
+    
+            xhr.send(data); 
+    
+      });
+    }
+
+    ///////////////////////////////////////////////////////////
+
+    async asyncCallGetRecom(input: string) {
+      console.log('Pidiendo');
+      try {
+        const res = await this.getRecom(input);
+        console.log('respuesta JSON:');
+        console.log(res);
+        return res;
+      } catch (error) {
+        console.log(error);
+        return error;
+      };
+    }
+    
+    getRecom(input: string) {
+      return new Promise(async (resolve, reject) => {
+        const data =null;
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://api.spotify.com/v1/recommendations?seed_tracks=' + input);
+        xhr.setRequestHeader('Authorization', `Bearer ${await this.GetToken()}`);
+    
+        xhr.onload = function () { 
+                if (xhr.status == 200) {
+                    console.log('respuesta del servidor o API Pedido Get Recom');
+                    let data = JSON.parse(this.response);
+                    resolve(data);
+                } else {
+                    reject(new Error('error en la conexion'));
+                }
+            };
+    
+            xhr.send(data); 
+    
+      });
+    }
+
 }
 

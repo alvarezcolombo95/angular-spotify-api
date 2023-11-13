@@ -36,9 +36,15 @@
               style="font-size: medium; text-overflow: ellipsis;
               width: 340px;
               overflow: hidden;
-              white-space: nowrap;">
+              white-space: nowrap;
+              margin: 0px;">
               {{item.name}}</h4>
-              <p class="card-text"><small class="text-muted">{{item.album.name}}</small></p>
+              <p class="card-text"><p class="text-muted" style="font-size: small; text-overflow: ellipsis;
+                width: 340px;
+                overflow: hidden;
+                white-space: nowrap;
+                margin: 5px;">{{item.album.name}}</p>
+              
               <audio style="width: 75%;" id="audio-player" controls>
                 <source src="{{item.preview_url}}" type="audio/mpeg">
                 Your browser does not support the audio element.
