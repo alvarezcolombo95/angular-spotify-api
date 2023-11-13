@@ -42,5 +42,20 @@ export class PlaylistService {
       })
     });
   }
+  async addTrack(userId:string,token:string,uris:string){
+    await fetch(`https://api.spotify.com/v1/playlists/${userId}/tracks`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'uris': [
+          `${uris}`
+        ],
+        'position': 0
+      })
+    });
+  }
 
 }
