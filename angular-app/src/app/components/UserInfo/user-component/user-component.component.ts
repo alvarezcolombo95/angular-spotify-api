@@ -58,9 +58,10 @@ export class UserComponentComponent implements OnInit {
     let dia = fechaActual.getDate();
     if (token != null) {
       let playlistId = await this.playlistService.createPlaylist(token, userId, `${this.showType}-${this.termType}-${ano}-${mes}-${dia}`)
+      console.log(playlistId)
       this.recentItems.forEach(track => {
-        if (token != null) {
-          this.playlistService.addTrack(playlistId, token, track.uri) //Agrego canciones 1 por 1
+        if (token != null) {// If para que la funcion tome el token//PROBAR INSISTIR SI TIRA ERROR?
+          this.playlistService.addTrack(playlistId, token, track.uri) //Agrego canciones 1 por 1 //Algunas agrega otras no!! eror 500/502
         }
       });
     }
