@@ -9,7 +9,8 @@ export class PlaylistService {
 
 
   async createPlaylist(token:string,userId:string,name:string){
-    const resp = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+    try {
+      const resp = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -23,12 +24,15 @@ export class PlaylistService {
     });
     let data = await resp.json();
     return data.id;
+    } catch (error) {
+    console.log(error)
+    }
   }
 
 
-  async addTracks(userId:string,token:string,uris:string[])
+  async addTracks(playlistId:string,token:string,uris:string[])
   {
-    await fetch(`https://api.spotify.com/v1/playlists/${userId}/tracks`, {
+    await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -42,11 +46,10 @@ export class PlaylistService {
       })
     });
   }
-  async addTrack(userId:string,token:string,uris:string){
-    let responseStatus = 0;
-    while (responseStatus == 500 || responseStatus == 502) {
-      try{
-    const response = await fetch(`https://api.spotify.com/v1/playlists/${userId}/tracks`, {
+
+
+  async addTrack(playlistId:string,token:string,uris:string){
+    await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -59,8 +62,39 @@ export class PlaylistService {
         'position': 0
       })
     });
-    responseStatus = response.status;
-  }catch(error){console.log(error)}
   }
-  }
+
+  
+  // async  addTrack(playlistId:string,token:string,uris:string) {
+  //   let responseStatus = 0;
+  //   while (responseStatus !== 201) {
+  //    try {
+  //      const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+  //        method: 'POST',
+  //        headers: {
+  //          'Authorization': `Bearer ${token}`,
+  //          'Content-Type': 'application/json'
+  //        },
+  //        body: JSON.stringify({
+  //          'uris': [
+  //            `${uris}`
+  //          ],
+  //          'position': 0
+  //        })
+  //      });
+  //      responseStatus = response.status;
+  //      if (responseStatus === 429) {
+  //        const retryAfter:any = response.headers.get('Retry-After');
+  //        await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
+  //      } else if (responseStatus !== 201) {
+  //        const responseText = await response.text();
+  //        console.error(`Error: ${responseText}`);
+  //      }
+  //    } catch (error) { 
+  //      console.error(`Error: ${error}`);
+  //    }
+  //   }
+  //  }
+   
+
 }
