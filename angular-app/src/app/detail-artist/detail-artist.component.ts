@@ -39,5 +39,11 @@ export class DetailArtistComponent{
         this.related = this.relatedArtistsResult.artists;
     }
 
+    switchId(id: string)
+    {
+        this.id = id;
+        this.callService();
+    }
+
     
 }
