@@ -43,7 +43,10 @@ export class PlaylistService {
     });
   }
   async addTrack(userId:string,token:string,uris:string){
-    await fetch(`https://api.spotify.com/v1/playlists/${userId}/tracks`, {
+    let responseStatus = 0;
+    while (responseStatus == 500 || responseStatus == 502) {
+      try{
+    const response = await fetch(`https://api.spotify.com/v1/playlists/${userId}/tracks`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -56,6 +59,8 @@ export class PlaylistService {
         'position': 0
       })
     });
+    responseStatus = response.status;
+  }catch(error){console.log(error)}
   }
-
+  }
 }
