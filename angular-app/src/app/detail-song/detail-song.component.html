@@ -22,7 +22,7 @@
   
     
     <div class="container-bottom">
-      <h3>Recomendaciones</h3>
+      <h3 style="display: inline-block;">Recomendaciones</h3><button style="font-size: smaller; padding: 5px; margin-left: 10px; margin-bottom: 10px; " type="button" class="btn btn-default" (click)="createPlaylist()">Generar Playlist</button>
       <div *ngFor="let track of recomTracks | slice:0:4" style="margin: 10px;">
         <div class="media-left"> <a href="#"> <img alt="" class="media-object"
             style="width: 120px; height: 120px;"
