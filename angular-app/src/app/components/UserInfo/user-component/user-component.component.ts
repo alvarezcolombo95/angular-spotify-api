@@ -59,13 +59,17 @@ export class UserComponentComponent implements OnInit {
     if (token != null) {
       let playlistId = await this.playlistService.createPlaylist(token, userId, `${this.showType}-${this.termType}-${ano}-${mes}-${dia}`)
       console.log(playlistId)
-      this.recentItems.forEach(track => {
+      for (let i=0;i<this.recentItems.length;i++){
         if (token != null) {// If para que la funcion tome el token//PROBAR INSISTIR SI TIRA ERROR?
-          this.playlistService.addTrack(playlistId, token, track.uri) //Agrego canciones 1 por 1 //Algunas agrega otras no!! eror 500/502
-        }
-      });
+        await this.playlistService.addTrack(playlistId, token, this.recentItems[i].uri) //Agrego canciones 1 por 1 //Algunas agrega otras no!! eror 500/502
+        await new Promise(resolve=> setTimeout(resolve,100));
+        
+      }
+        
+         }
+      }
     }
-  }
+  
 
 
   async toggleTermType() {
