@@ -1,5 +1,8 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { SpotifySearchItemService } from '../services/spotify-search-item.service';
+import { LoginService } from '../services/login.service';
+import { UserService } from '../services/UserService/user.service';
+import { PlaylistService } from '../services/PlaylistService/playlist.service';
 
 
 @Component({
@@ -14,7 +17,7 @@ export class DetailSongComponent {
   recom: any = null;
   recomTracks!: any[];
 
-  constructor(private spotifyService: SpotifySearchItemService) {}
+  constructor(private spotifyService: SpotifySearchItemService, private loginservice: LoginService, private userservice: UserService, private playlistService: PlaylistService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['id']) {
@@ -27,12 +30,41 @@ export class DetailSongComponent {
   }
 
   async callService()
-    {
-        this.trackResult = await this.spotifyService.asyncCallGetTrack(this.id);
-        this.recom = await this.spotifyService.asyncCallGetRecom(this.id)
-        this.recomTracks = this.recom.tracks;
-        
+  {
+      this.trackResult = await this.spotifyService.asyncCallGetTrack(this.id);
+      this.recom = await this.spotifyService.asyncCallGetRecom(this.id)
+      this.recomTracks = this.recom.tracks;
+      
+  }
+
+  async getId() {
+    try {
+      const response = await this.userservice.getUser();
+      const data = await response.json();
+      console.log(data.id);
+      return data.id;
+    } catch (error) {
+      console.error('Error:', error);
     }
+  }
+
+  async createPlaylist() {
+    let token = this.loginservice.getToken()
+    let userId = await this.getId();
+    if (token != null) {
+      let playlistId = await this.playlistService.createPlaylist(token, userId, `If you like...` + this.trackResult.name)
+      console.log(playlistId)
+      
+      for (let i = 0; i < this.recomTracks.length; i++)
+      {
+        if(token != null)
+        {
+          await this.playlistService.addTrack(playlistId, token, this.recomTracks[i].uri);
+          await new Promise(resolve => setTimeout(resolve, 100));
+        }
+      }
+    }
+  }
 
 
 
