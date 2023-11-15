@@ -2,6 +2,7 @@ img{
     height: 300px;
     width: 300px;
     border-radius: 150px;
+    display: flex;
     float: left;
     margin-right: 20px;
     margin-left: 0px;
@@ -29,12 +30,12 @@ img{
    }
 .create{
     position: relative;
-    top: 100px;
     display: flex;
     text-align: center;
     justify-content: flex-start;
     flex-direction: column;
     align-items: center;
+    margin-top: 100px;
 }
 .profile-info{
     display: flex;
@@ -53,6 +54,12 @@ img{
     margin-left: 0%;
     width: 100%;
     gap: 5px;
+}
+
+.container-info{
+    display: flex;
+
+
 }
 .borde{
     border: 5px solid #181515;

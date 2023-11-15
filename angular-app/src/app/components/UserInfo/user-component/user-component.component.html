@@ -1,14 +1,19 @@
-<div *ngIf="!!this.isLoged(); else sesionNoIniciada" class="container info">
+<div *ngIf="!!this.isLoged(); else sesionNoIniciada" class="container">
     <div class="col-1 borde">
-        <img [src]="profilePicUrl" alt="User Profile Picture">
-        <div class="profile-info">
-            <h2 style="font-size: 50px; font-weight: bold;">{{nombreUsuario}}</h2>
-            <h6>Followers: {{followers}}</h6>
+        
+        <div class="container-info">
+            <img [src]="profilePicUrl" alt="User Profile Picture">
+            <div class="profile-info">
+                <h2 style="font-size: 50px; font-weight: bold;">{{nombreUsuario}}</h2>
+                <h6>Followers: {{followers}}</h6>
+            </div> 
         </div>
+
         <div *ngIf="showType==='Canciones'" class="create">
             <p>Si te gusta lo que has estado escuchando, crea una playlist y guardalo en tu biblioteca</p>
             <button  (click)="createPlaylist()" class="btn btn-create">Crear Playlist</button>
         </div>
+               
     </div>
     <div class="recent col-2 borde">
         <h3>Esto es lo que has estado escuchando!</h3>
