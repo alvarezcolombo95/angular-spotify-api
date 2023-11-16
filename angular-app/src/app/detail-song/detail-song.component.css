@@ -1,15 +1,12 @@
 .container{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding-top: 10px;
-    margin-right: 10px;
-    position: absolute;
-    right: 0;
-    top: 6%;
-    width: 60%;
-    gap: 5px;
+    width: 100%;
+    text-align: left;
+    
 }
+
+
 
 .container-top{
     height: 50%;
@@ -25,7 +22,7 @@
 
  .borde{
     border: 5px solid #181515;
-    border-radius: 28px;
+    border-radius: 5px;
 }
  
 .row-1{
