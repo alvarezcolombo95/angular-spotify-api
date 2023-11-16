@@ -20,6 +20,7 @@ import { UserComponentComponent } from './components/UserInfo/user-component/use
 import { TrackComponent } from './components/Track/track/track.component';
 import { DetailSongComponent } from './detail-song/detail-song.component';
 import { ArtistComponent } from './components/artist/artist/artist.component';
+import { NoSesionComponent } from './components/NoSesion/no-sesion/no-sesion.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ArtistComponent } from './components/artist/artist/artist.component';
     UserComponentComponent,
     TrackComponent,
     DetailSongComponent,
-    ArtistComponent
+    ArtistComponent,
+    NoSesionComponent
   ],
   imports: [
     BrowserModule,

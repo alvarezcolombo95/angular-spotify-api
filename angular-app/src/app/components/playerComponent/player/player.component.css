@@ -1,0 +1,22 @@
+.inner{
+    display: inline-flex;
+    flex-direction: column;
+}
+.player-buttons{
+    display: inline-flex;
+    text-align: center;
+    justify-content: center;
+    margin-top: 10%;
+}
+
+.btn{
+    background-color: #191414;
+    margin: 5px;
+}
+.btn:hover {
+    border-color:#ffffff;
+ }
+ .btn:active {
+    background-color: #1db954!important;
+    border-color: var(#191414);
+ }
