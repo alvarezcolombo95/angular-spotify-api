@@ -31,7 +31,7 @@ constructor(private  playerservise: PlayerService, private loginservice: LoginSe
       this.playerservise.previousSong(token);
     }
   }
-  playpause(){
+   playpause(){
     let token =  this.loginservice.getToken();
     if(!!token){
     this.playerservise.playPause(token);
@@ -55,4 +55,15 @@ constructor(private  playerservise: PlayerService, private loginservice: LoginSe
       return 0;
     }
   }
+
+
+
+  // async getTrack(){
+  //   let token =this.loginservice.getToken()
+  //   let track;
+  //   if(!!token)
+  //   track= await this.playerservise.getCurrentTrack(token);
+  //   console.log(track)
+  //   return track;
+  // }
 }
