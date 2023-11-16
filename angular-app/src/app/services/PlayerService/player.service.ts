@@ -20,10 +20,29 @@ export class PlayerService implements OnInit {
       }
     });
   }
+
+  async transferPlaybackState(token:string,devid:string){
+    await fetch('https://api.spotify.com/v1/me/player', {
+method: 'PUT',
+headers: {
+  'Authorization': `Bearer ${token}`,
+  'Content-Type': 'application/json'
+},
+// body: '{\n    "device_ids": [\n        "74ASZWbe4lXaubB36ztrGX"\n    ]\n}',
+body: JSON.stringify({
+  'device_ids': [
+    `${devid}`
+  ],
+  'play': true
+})
+});
+  }
+
   async playPause(token: string) {
-    const devid = await this.deviceservice.obtenerDispositivos(token);
-    if(!! await this. getState(token)){
-      console.log('Esta pausado')
+    const devid = await this.deviceservice.obtenerDispositivos(token);//Obtengo el dispositivo disponible
+    try{
+      if(!! await this. getState(token)){
+      console.log('Esta Reproduciendo')
       await fetch('https://api.spotify.com/v1/me/player/pause', {
         method: 'PUT',
         headers: {
@@ -33,6 +52,7 @@ export class PlayerService implements OnInit {
       });
     }
     else{
+      console.log('Esta Pausado')
       await fetch('https://api.spotify.com/v1/me/player/play', {
         method: 'PUT',
         headers: {
@@ -43,8 +63,14 @@ export class PlayerService implements OnInit {
       });
       }
     }
+    catch(error){
+      this.transferPlaybackState(token, devid);//Si no esta activo lo hago activo y reproduzco
+    }
     
-  
+
+    }
+    
+    
 
 
 
@@ -66,11 +92,20 @@ export class PlayerService implements OnInit {
           }
         })
       let data  = await response.json()
-      console.log(data.is_playing)
-      return data.is_playing;
+      return data.is_playing;//True or false si esta reproduciendo o no
     
   }
 
+//   async getCurrentTrack(token:string){
+//     const data = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
+//   headers: {
+//     'Authorization': `Bearer ${token}`
+//   }
+// });
+//   const resp = await data.json();
+//   return resp.item;
+
+//   }
 
 
 }

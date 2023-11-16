@@ -9,3 +9,6 @@
     padding: 1em; /*Esto es todo lo que le da tamaño vertical al navbar, tal vez intercambiar con otro parametro en el futuro
     box-sizing: border-box;  
   }*/
+body{
+  font-family: sans-serif;
+}
