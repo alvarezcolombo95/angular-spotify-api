@@ -1,28 +1,31 @@
 
 
- <div *ngIf="searchResult && searchResult.tracks && searchResult.tracks.items" style="max-width: 740px; ">
-    <h2 class="page-header" style="margin-left: 15px; margin-bottom: 20px;">Canciones</h2>
-    <div style="height: 80vh; overflow-y: auto;">
-        <div class="media" *ngFor="let item of searchResult.tracks.items">
-            <div class="media-left">
-                <a href="#">
-                <img class="media-object" style="width: 110px; height: 110px; margin-left: 15px;" src="{{item.album.images && item.album.images.length > 0 ? item.album.images[0].url : '/assets/img/default-image-song.png'}}" alt="Card image cap">
-                </a>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading">{{item.name}}</h4>
-                <span *ngFor="let artist of item.artists ; let isLast=last " class="card-text"><span class="">{{artist.name}}{{isLast ? '' : ', '}}</span></span>
-                <p class="card-text"><small class="text-muted">{{item.album.name}}</small></p>
-                <button style="font-size: smaller; padding: 5px;" type="button" class="btn btn-default" (click)="(viewDetails(item.id))">Ver Detalles</button>
-            </div>
+ <div class="container-main" *ngIf="searchResult && searchResult.tracks && searchResult.tracks.items">
+    <div class="">
+        <h2 class="page-header title" style="margin-left: 15px; margin-bottom: 20px;">Canciones</h2>
+        <div class="container-results">
+            <div class="media" *ngFor="let item of searchResult.tracks.items">
+                <div class="media-left">
+                    <a href="#">
+                    <img class="media-object" style="width: 110px; height: 110px; margin-left: 15px;" src="{{item.album.images && item.album.images.length > 0 ? item.album.images[0].url : '/assets/img/default-image-song.png'}}" alt="Card image cap">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">{{item.name}}</h4>
+                    <span *ngFor="let artist of item.artists ; let isLast=last " class="card-text"><span class="">{{artist.name}}{{isLast ? '' : ', '}}</span></span>
+                    <p class="card-text"><small class="text-muted">{{item.album.name}}</small></p>
+                    <button style="font-size: smaller; padding: 5px;" type="button" class="btn btn-default" (click)="(viewDetails(item.id))">Ver Detalles</button>
+                </div>
+            </div> 
         </div> 
-    </div> 
+    </div>
     
-    <div class="container-right borde ">
+    
+    <div class="container-right">
         <div *ngIf="!displayDetails" class="instruction">
             <p class="glyphicon glyphicon-music text-muted y-centered"></p><p class="text-muted y-centered">Click en una canción para ver detalles</p>
         </div>
-        <div *ngIf="displayDetails">
+        <div class="container-comp" *ngIf="displayDetails">
             <app-detail-song [id] ="idDetails"></app-detail-song>
         </div> 
     </div>  

@@ -1,7 +1,7 @@
 
-<div *ngIf="searchResult && searchResult.artists && searchResult.artists.items" style="max-width: 740px; ">
-  <h2 class="page-header" style="margin-left: 15px; margin-bottom: 20px;">Artistas</h2>
-  <div style="height: 80vh; overflow-y: auto;">
+<div class="container-main" *ngIf="searchResult && searchResult.artists && searchResult.artists.items">
+  <h2 class="page-header title" style="margin-left: 15px; margin-bottom: 20px;">Artistas</h2>
+  <div class="container-results">
       <div class="media" *ngFor="let item of searchResult.artists.items">
           <div class="media-left">
               <a href="#">
@@ -18,10 +18,10 @@
   </div> 
   
   <div >
-      <div *ngIf="!displayDetails" style="position: fixed; right: 25%; top: 50%; transform: translate(0%, 0%); text-align: center;">
-        <span class="glyphicon glyphicon-user text-muted"></span><br><p class="text-muted">Click en un artista para ver detalles</p>
+      <div class="instruction" *ngIf="!displayDetails">
+        <p class="glyphicon glyphicon-user text-muted y-centered"></p><p class="text-muted y-centered">Click en un artista para ver detalles</p>
       </div>
-      <div *ngIf="displayDetails">
+      <div class="container-comp" *ngIf="displayDetails">
         <app-detail-artist [id] ="idDetails"></app-detail-artist>
       </div>        
   </div>
