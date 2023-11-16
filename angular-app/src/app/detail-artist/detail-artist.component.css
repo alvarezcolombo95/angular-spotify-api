@@ -4,7 +4,9 @@
     justify-content: space-between;
     padding-top: 10px;
     margin-right: 10px;
+    margin-left: 25px;
     position: absolute;
+    max-width: fit-content;
 }
 
 .container-top{
