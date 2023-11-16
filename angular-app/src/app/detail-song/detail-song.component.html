@@ -1,5 +1,4 @@
 <div class="container">
-
     <div class="container-top">
       <div *ngIf="trackResult" class="media  margin-cont">
         <div class="media-left"> <a href="#"> <img alt="" class="media-object"
@@ -11,11 +10,10 @@
           <span *ngFor="let artist of trackResult.artists ; let isLast=last " class="card-text"><span class="" style="font-size: x-large;">{{artist.name}}{{isLast ? '' : ', '}}</span></span>
           <p>{{trackResult.album.name}}</p>
           
-          <audio style="width: 75%;" id="audio-player" controls>
-            <source src="{{trackResult.preview_url}}" type="audio/mpeg">
+          <audio style="width: 75%;" id="audio-player-main" controls>
+            <source [src]="trackResult.preview_url" type="audio/mpeg">
             Your browser does not support the audio element.
           </audio>
-
         </div>
       </div>
     </div>
@@ -34,16 +32,11 @@
             <span *ngFor="let artist of track.artists ; let isLast=last " class="card-text"><span class="">{{artist.name}}{{isLast ? '' : ', '}}</span></span>
             <p class="card-text"><small class="text-muted">{{track.album.name}}</small></p>
 
-            <audio style="width: 75%;" id="audio-player" controls>
+            <audio style="width: 75%;" id="audio-player-recom" controls>
                 <source src="{{track.preview_url}}" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>    
         </div>
-      </div>
-
-      
-                
-
-    </div>
-      
+      </div>  
+    </div>    
   </div>
