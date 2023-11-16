@@ -16,6 +16,7 @@ export class DetailSongComponent {
   trackResult: any = null;
   recom: any = null;
   recomTracks!: any[];
+  audioPlayer: any = null;
 
   constructor(private spotifyService: SpotifySearchItemService, private loginservice: LoginService, private userservice: UserService, private playlistService: PlaylistService) {}
 
@@ -34,6 +35,9 @@ export class DetailSongComponent {
       this.trackResult = await this.spotifyService.asyncCallGetTrack(this.id);
       this.recom = await this.spotifyService.asyncCallGetRecom(this.id)
       this.recomTracks = this.recom.tracks;
+      this.audioPlayer = document.getElementById('audio-player-main');
+      this.audioPlayer.load();
+
       
   }
 
