@@ -47,6 +47,7 @@ export class LoginService implements OnInit{
   
   logOut(){
     localStorage.setItem('token', '')
+    this.token=''
   }
 
   checkLog(){
