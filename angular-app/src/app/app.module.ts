@@ -21,6 +21,7 @@ import { TrackComponent } from './components/Track/track/track.component';
 import { DetailSongComponent } from './detail-song/detail-song.component';
 import { ArtistComponent } from './components/artist/artist/artist.component';
 import { NoSesionComponent } from './components/NoSesion/no-sesion/no-sesion.component';
+import { logGuard } from './services/log-guard.guard';
 
 @NgModule({
   declarations: [

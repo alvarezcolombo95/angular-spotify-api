@@ -92,7 +92,7 @@ export class UserComponentComponent implements OnInit {
     try {
       const response = await this.userservice.recentItems(type, term);
       const data = await response.json();
-      console.log(data.items);
+      //console.log(data.items);
       return data.items;
     } catch (error) {
       console.error('Error:', error);
@@ -138,7 +138,7 @@ export class UserComponentComponent implements OnInit {
     try {
       const response = await this.userservice.getUser();
       const data = await response.json();
-      console.log(data.followers.total);
+      //console.log(data.followers.total);
       return data.followers.total;
     }
     catch (error) {

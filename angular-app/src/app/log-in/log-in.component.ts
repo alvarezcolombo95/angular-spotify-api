@@ -25,7 +25,7 @@ export class LogInComponent implements OnInit {
       console.log('Sesion iniciada');
       let tkn = this.loginService.token;
       localStorage.setItem('token', tkn);//Actualizo el token
-      console.log(tkn);
+      //console.log(tkn);
       return 1;
     }
     else {
