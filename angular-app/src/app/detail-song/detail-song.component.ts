@@ -18,6 +18,9 @@ export class DetailSongComponent {
   recomTracks!: any[];
   audioPlayer: any = null;
 
+  playlistSuccess: boolean = false;
+  loginFailure: boolean = false;
+
   constructor(private spotifyService: SpotifySearchItemService, private loginservice: LoginService, private userservice: UserService, private playlistService: PlaylistService) {}
 
   ngOnChanges(changes: SimpleChanges) {
@@ -38,6 +41,9 @@ export class DetailSongComponent {
       this.audioPlayer = document.getElementById('audio-player-main');
       this.audioPlayer.load();
 
+      this.playlistSuccess = false;
+      this.loginFailure = false;
+
       
   }
 
@@ -52,13 +58,23 @@ export class DetailSongComponent {
     }
   }
 
+  async getTokenAsync(){
+    try {
+      let token = await this.loginservice.getToken()
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
   async createPlaylist() {
-    let token = this.loginservice.getToken()
+    let token = null;
+    token = this.loginservice.getToken()
     let userId = await this.getId();
-    if (token != null) {
+    if (token) {
       let playlistId = await this.playlistService.createPlaylist(token, userId, `If you like...` + this.trackResult.name)
       console.log(playlistId)
-      
+
+      this.playlistSuccess = true;
       for (let i = 0; i < this.recomTracks.length; i++)
       {
         if(token != null)
@@ -67,6 +83,10 @@ export class DetailSongComponent {
           await new Promise(resolve => setTimeout(resolve, 100));
         }
       }
+    }
+    else
+    {
+      this.loginFailure = true;
     }
   }
 
