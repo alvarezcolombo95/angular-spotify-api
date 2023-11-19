@@ -1,7 +1,4 @@
 
-// export const logGuard: CanActivateFn = (route, state) => {
-//   return true;
-// };
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot,RouterStateSnapshot,CanActivateFn, Router } from '@angular/router';
 import { LoginService } from './login.service';
@@ -15,7 +12,11 @@ export const logGuard: CanActivateFn =(
     if (authService.checkLog())
         return true;
     else{
-      router.navigate(['login']);
+      router.navigate(['no-sesion'])
+      setTimeout(() => {
+      alert('Debe iniciar sesión   para acceder a esta funcion')
+      router.navigate(['log-in'])
+      }, 500);
       return false;
     }
   }
