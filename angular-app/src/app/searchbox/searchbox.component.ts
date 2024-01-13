@@ -19,13 +19,13 @@ export class SearchboxComponent implements OnInit {
   
   constructor(private spotifyService: SpotifySearchItemService, private router: Router, private data: SearchCommService) {
     this.searchForm = new FormGroup({
-      searchStr: new FormControl('', Validators.pattern(/^[a-zA-Z0-9]*$/))
+      searchStr: new FormControl('', Validators.pattern(/^[a-zA-Z0-9 ]*$/))
     });
   }
 
   ngOnInit() {
     this.searchForm = new FormGroup({
-      searchStr: new FormControl('', Validators.pattern(/^[a-zA-Z0-9]*$/))
+      searchStr: new FormControl('', Validators.pattern(/^[a-zA-Z0-9 ]*$/))
     });
 
     this.data.currentResult.subscribe(searchResult => this.searchResult = searchResult)
