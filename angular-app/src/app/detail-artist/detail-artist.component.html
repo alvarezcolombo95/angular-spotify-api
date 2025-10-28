@@ -54,7 +54,35 @@
       </div>        
     </div>
 
+    <!--Edicion 28-10-2025 CONTAINER PARA ALBUMES MAS ESCUCHADOS-->
     <div class="container-bottom-right  margin-cont">
+      <h3>Albumes mas recientes</h3>
+      <div *ngIf="albums?.length">
+        <div class="media" *ngFor="let item of albums | slice:0:5">
+          <div class="media-left">
+              <a href="#">
+              <img class="media-object" style="width: 95px; height: 95px; margin-left: 15px;" src="{{item.images && item.images.length > 0 ? item.images[0].url : '/assets/img/default-image-song.png'}}" alt="Card image cap">
+              </a>
+          </div>
+          <div class="media-body">
+              <h4 class="media-heading" 
+              style="font-size: medium; text-overflow: ellipsis;
+              width: 340px;
+              overflow: hidden;
+              white-space: nowrap;
+              margin: 0px;">
+              {{item.name}}</h4>
+              <p class="card-text"><p class="text-muted" style="font-size: small; text-overflow: ellipsis;
+                width: 340px;
+                overflow: hidden;
+                white-space: nowrap;
+                margin: 5px;">{{ item.release_date | date:'yyyy' }}</p>
+               </div>
+        </div> 
+      </div>        
+    </div>
+    
+    <!--<div class="container-bottom-right  margin-cont">
       <h3>Artistas Relacionados</h3>
       <div *ngIf="relatedArtistsResult">
         <div class="media" *ngFor="let item of related | slice:0:5">
@@ -72,6 +100,7 @@
         </div> 
       </div>
     </div>
+    -->
 
   </div>
 

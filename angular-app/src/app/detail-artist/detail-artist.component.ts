@@ -43,7 +43,7 @@ export class DetailArtistComponent{
         this.related = this.relatedArtistsResult.artists;
 
         this.artistAlbumsResult = await this.spotifyService.asyncCallGetArtistAlbums(this.id)
-        this.albums = this.artistAlbumsResult.albums
+        this.albums = this.artistAlbumsResult.items
     }
 
     switchId(id: string)
