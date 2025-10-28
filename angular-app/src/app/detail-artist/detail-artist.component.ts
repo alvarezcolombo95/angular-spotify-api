@@ -17,6 +17,10 @@ export class DetailArtistComponent{
     relatedArtistsResult: any = null;
     related!: any[];
 
+    artistAlbumsResult: any = null;
+    albums!: any[];
+
+
     constructor(private spotifyService: SpotifySearchItemService) {}
 
     ngOnChanges(changes: SimpleChanges) {
@@ -37,6 +41,9 @@ export class DetailArtistComponent{
 
         this.relatedArtistsResult = await this.spotifyService.asyncCallGetRelatedArtists(this.id)
         this.related = this.relatedArtistsResult.artists;
+
+        this.artistAlbumsResult = await this.spotifyService.asyncCallGetArtistAlbums(this.id)
+        this.albums = this.artistAlbumsResult.albums
     }
 
     switchId(id: string)
