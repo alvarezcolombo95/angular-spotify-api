@@ -22,6 +22,7 @@ import { DetailSongComponent } from './detail-song/detail-song.component';
 import { ArtistComponent } from './components/artist/artist/artist.component';
 import { NoSesionComponent } from './components/NoSesion/no-sesion/no-sesion.component';
 import { logGuard } from './services/log-guard.guard';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { logGuard } from './services/log-guard.guard';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
