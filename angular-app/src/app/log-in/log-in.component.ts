@@ -13,9 +13,10 @@ export class LogInComponent implements OnInit {
 
 
   }
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.loginService.handleAuthCallback();
     this.sesionIniciada();
-    console.log(localStorage.getItem('token'))
+    console.log(localStorage.getItem('token'));
   }
 
   sesionIniciada() {
@@ -40,7 +41,7 @@ export class LogInComponent implements OnInit {
     const url = await this.loginService.getUrlLogin();
     window.location.href = url;
   }
-  
+
   logout() {
     this.loginService.logOut();
   }

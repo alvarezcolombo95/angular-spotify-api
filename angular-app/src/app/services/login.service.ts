@@ -55,6 +55,11 @@ export class LoginService implements OnInit {
     return authEndPoint + clientId + redirectUrl + scopes + responseType;
   }
 
+  // HANDLE AUTH CALLBACK //
+  async handleAuthCallback() {
+  await this.getTokenFromUrl();
+}
+
 
   // --- EXCHANGE CODE FOR TOKEN ---
   async exchangeCodeForToken(code: string): Promise<string> {
