@@ -36,9 +36,11 @@ export class LogInComponent implements OnInit {
 
 
 
-  whenCLick() {
-    window.location.href = this.loginService.getUrlLogin();
+   async whenCLick() {
+    const url = await this.loginService.getUrlLogin();
+    window.location.href = url;
   }
+  
   logout() {
     this.loginService.logOut();
   }
