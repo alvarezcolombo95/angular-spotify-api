@@ -19,8 +19,8 @@
         <button class="btn btn-default" (click)="toggleTermType()">
             {{termType}}
         </button>
-        <button *ngIf="showType==='Canciones'" (click)="createPlaylist()" class="btn btn-create">Crear Playlist
-        </button>
+        <button *ngIf="showType==='Canciones'" (click)="createPlaylist()" class="btn btn-create">Crear Playlist</button>
+        <span *ngIf="playlistSuccess" style="margin-left: 10px; font-weight: bold; color: green;">Playlist creada con exito</span>
         <br><br>
         <ng-container *ngIf="showType==='Canciones'">
             <app-track class="media" *ngFor="let item of recentItems" [track]="item"></app-track>
