@@ -53,6 +53,8 @@ export class LoginService implements OnInit{
   checkLog(){
     return !!localStorage.getItem('token'); //No controla si el token esta desactualizado
   }
+
+  ///checkpoint///
   
    
 }
