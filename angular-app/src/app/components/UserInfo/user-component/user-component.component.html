@@ -8,6 +8,10 @@
                 <h6>Followers: {{followers}}</h6>
             </div> 
         </div>
+        <div *ngIf="genreCounts && recentArtists.length > 0" style="width: 400px; margin: auto;">
+            <h3 style="text-align:center;">Tus géneros más escuchados</h3>
+            <canvas id="genreChartCanvas"></canvas>
+        </div>
                
     </div>
     <div class="recent col-2 borde">
