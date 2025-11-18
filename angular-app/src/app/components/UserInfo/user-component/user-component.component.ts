@@ -2,6 +2,8 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { PlaylistService } from 'src/app/services/PlaylistService/playlist.service';
 import { UserService } from 'src/app/services/UserService/user.service';
 import { LoginService } from 'src/app/services/login.service';
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 
 @Component({
@@ -16,12 +18,14 @@ export class UserComponentComponent implements OnInit {
   profilePicUrl!: string;
   followers!: string;
   recentItems = [] as any[];
-  recentArtists = [];
+  recentArtists: any[] = [];
   showType: string = 'Canciones'
   termType: string = 'Ultimos 6 meses'
   term: string = 'medium_term';
   type: string = 'tracks';
   playlistSuccess: boolean = false;
+  genreCounts: any = {};
+  genreChart: any;
 
   constructor(private loginservice: LoginService, private userservice: UserService, private playlistService: PlaylistService) {
   }
@@ -32,6 +36,8 @@ export class UserComponentComponent implements OnInit {
     this.followers = await this.getFollowers();
     this.recentItems = await this.getRecentItems('tracks', 'medium_term');
     this.recentArtists = await this.getRecentItems('artists', 'medium_term');
+    this.extractGenres();
+    this.buildGenreChart();
   }
 
 
@@ -81,6 +87,10 @@ export class UserComponentComponent implements OnInit {
       this.termType === 'All time' ? 'Ultimo mes' : 'Ultimos 6 meses';
     this.recentItems = await this.getRecentItems('tracks', this.term);
     this.recentArtists = await this.getRecentItems('artists', this.term);
+
+    //update chart
+    this.extractGenres(); 
+    this.buildGenreChart(); 
   }
 
   async toggleShowType() {
@@ -155,6 +165,55 @@ export class UserComponentComponent implements OnInit {
       return 1;
     else
       return 0;
+  }
+
+  //Extract genres and count them
+  extractGenres() {
+  const counts: any = {};
+
+  for (const artist of this.recentArtists) {
+    if (artist.genres) {
+      for (const genre of artist.genres) {
+        counts[genre] = (counts[genre] || 0) + 1;
+      }
+    }
+  }
+
+  // Convert to array, sort, and keep top 10
+  const sorted = Object.entries(counts)
+    .sort((a: any, b: any) => b[1] - a[1])      // sort by count desc
+    .slice(0, 10);                               // keep only top 10
+
+  // Rebuild as object
+  this.genreCounts = Object.fromEntries(sorted);
+}
+
+  //Build the chart using Chart.js
+  buildGenreChart() {
+    const labels = Object.keys(this.genreCounts);
+    const values = Object.values(this.genreCounts);
+
+    if (this.genreChart) {
+      this.genreChart.destroy(); // avoid duplicates
+    }
+
+    this.genreChart = new Chart("genreChartCanvas", {
+      type: "doughnut",
+      data: {
+        labels: labels,
+        datasets: [{
+          data: values,
+          backgroundColor: this.generateColors(labels.length)
+        }]
+      }
+    });
+  }
+
+  //Generate random colors for the chart
+  generateColors(count: number) {
+    return Array.from({ length: count }, () =>
+      `hsl(${Math.random() * 360}, 75%, 50%)`
+    );
   }
 }
 
