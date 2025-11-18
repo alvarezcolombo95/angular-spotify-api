@@ -21,6 +21,7 @@ export class UserComponentComponent implements OnInit {
   termType: string = 'Ultimos 6 meses'
   term: string = 'medium_term';
   type: string = 'tracks';
+  playlistSuccess: boolean = false;
 
   constructor(private loginservice: LoginService, private userservice: UserService, private playlistService: PlaylistService) {
   }
@@ -63,7 +64,7 @@ export class UserComponentComponent implements OnInit {
         if (token != null) {// If para que la funcion tome el token//PROBAR INSISTIR SI TIRA ERROR?
         await this.playlistService.addTrack(playlistId, token, this.recentItems[i].uri) //Agrego canciones 1 por 1 //Algunas agrega otras no!! eror 500/502
         await new Promise(resolve=> setTimeout(resolve,100));
-        
+        this.playlistSuccess = true;
       }
         
          }
@@ -73,6 +74,7 @@ export class UserComponentComponent implements OnInit {
 
 
   async toggleTermType() {
+    this.playlistSuccess = false;
     this.term = (this.term === 'short_term' ? 'medium_term' :
       this.term === 'medium_term' ? 'long_term' : 'short_term');
     this.termType = this.termType === 'Ultimos 6 meses' ? 'All time' :
@@ -82,6 +84,7 @@ export class UserComponentComponent implements OnInit {
   }
 
   async toggleShowType() {
+    this.playlistSuccess = false;
     this.showType = (this.showType === 'Canciones' ? 'Artistas' : 'Canciones');
     //this.type = (this.type === 'tracks'? 'artists': 'tracks');
     this.recentItems = await this.getRecentItems('tracks', this.term);
