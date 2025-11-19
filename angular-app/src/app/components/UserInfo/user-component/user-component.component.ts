@@ -13,24 +13,30 @@ Chart.register(...registerables);
 })
 export class UserComponentComponent implements OnInit {
 
-
-  nombreUsuario!: string;
-  profilePicUrl!: string;
-  followers!: string;
-  recentItems = [] as any[];
-  recentArtists: any[] = [];
+  //initialize to avoid bug displaying while not being logged
+  profilePicUrl: string = '';
+  nombreUsuario: string = '';
+  followers: number = 0;
+  recentArtists: any[] = [];  
+  recentItems: any[] = [];    
   showType: string = 'Canciones'
   termType: string = 'Ultimos 6 meses'
   term: string = 'medium_term';
   type: string = 'tracks';
   playlistSuccess: boolean = false;
-  genreCounts: any = {};
+  genreCounts: any = null;
   genreChart: any;
 
   constructor(private loginservice: LoginService, private userservice: UserService, private playlistService: PlaylistService) {
   }
 
   async ngOnInit() {
+
+    if (!this.loginservice.checkLog()) {
+    console.log("User is not logged in — stopping ngOnInit");
+    return;
+    }
+
     this.nombreUsuario = await this.getName();
     this.profilePicUrl = await this.getProfilePic();
     this.followers = await this.getFollowers();

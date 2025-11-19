@@ -8,7 +8,9 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 export class LoginService implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.token = localStorage.getItem('token') || '';
+   }
 
   ngOnInit(): void {}
 
@@ -49,7 +51,6 @@ export class LoginService implements OnInit {
     const redirectUrl = `redirect_uri=${SpotifyConfiguration.redirectUrl}&`;
     const scopes = `scope=${SpotifyConfiguration.scope.join('%20')}&`;
     
-    // Changed ONLY this:
     const responseType = `response_type=code&code_challenge_method=S256&code_challenge=${challenge}&show_dialog=true`;
 
     return authEndPoint + clientId + redirectUrl + scopes + responseType;
@@ -90,8 +91,12 @@ export class LoginService implements OnInit {
     const accessToken = tokenResp.access_token;
 
     if (accessToken) {
-      localStorage.setItem('token', accessToken);  // unchanged
-      this.token = accessToken;                   // unchanged
+      localStorage.setItem('token', accessToken); 
+      this.token = accessToken;
+      
+      const expiresIn = tokenResp.expires_in;       // seconds
+      const expirationTime = Date.now() + expiresIn * 1000;
+      localStorage.setItem('token_expiration', expirationTime.toString());
     }
 
     return accessToken;
@@ -100,7 +105,6 @@ export class LoginService implements OnInit {
 
 
   async getTokenFromUrl() {
-    // CHANGED: code now comes in querystring, not hash
     const url = new URL(window.location.href);
     const code = url.searchParams.get('code');
 
@@ -127,11 +131,25 @@ export class LoginService implements OnInit {
   }
 
   logOut() {
-    localStorage.setItem('token', '');
+    localStorage.removeItem('token');
+    localStorage.removeItem('token_expiration');
     this.token = '';
   }
 
   checkLog() {
-    return !!localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+    const expiration = localStorage.getItem('token_expiration');
+
+    if (!token || token === '' || token === 'undefined') return false;
+    if (!expiration) return false;
+
+    const expiresAt = parseInt(expiration);
+    if (Date.now() > expiresAt) {
+      console.log('Token expired, logging out.');
+      this.logOut();
+      return false;
+    }
+
+    return true;
   }
 }
