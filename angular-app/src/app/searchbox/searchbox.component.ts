@@ -16,6 +16,7 @@ export class SearchboxComponent implements OnInit {
   searchForm: FormGroup;
   searchResult: any = null;
   searchType: string = 'Artistas';
+  searchOptions = ['Artistas', 'Canciones', 'Álbumes'];
   
   constructor(private spotifyService: SpotifySearchItemService, private router: Router, private data: SearchCommService) {
     this.searchForm = new FormGroup({
@@ -33,7 +34,8 @@ export class SearchboxComponent implements OnInit {
   }
 
   toggleSearchType() {
-    this.searchType = this.searchType === 'Artistas' ? 'Canciones' : 'Artistas';
+    const currentIndex = this.searchOptions.indexOf(this.searchType);
+    this.searchType = this.searchOptions[(currentIndex + 1) % this.searchOptions.length];
   }
 
 
@@ -55,6 +57,10 @@ export class SearchboxComponent implements OnInit {
         this.router.navigate(['/search-result-song'])
         this.searchResult = await this.spotifyService.asyncCallSearchItem(searchStr, "track");
         
+      }
+      else{
+        this.router.navigate(['/search-result-album']);
+        this.searchResult = await this.spotifyService.asyncCallSearchItem(searchStr, "album");
       }
   
       this.data.changeResult(this.searchResult);
