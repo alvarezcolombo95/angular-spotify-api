@@ -1,0 +1,49 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: left;    
+    margin-left: 25px;
+    max-width: fit-content;
+    
+}
+
+
+
+.container-top{
+    height: 50%;
+}
+
+.container-bottom{
+    height: 50%;
+}
+
+.margin-cont{
+    margin: 5px;
+ }
+
+ .borde{
+    border: 5px solid #181515;
+    border-radius: 5px;
+}
+ 
+.row-1{
+    height: 50%;
+}
+.row-2{
+    height: 50%;
+}
+
+.recent{
+    text-align: center;
+}
+
+.track-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.track-duration {
+  color: #666;
+}
