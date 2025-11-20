@@ -2,6 +2,7 @@
     <button type="button"  (click)="toggleSearchType()" class="btn btn-default">
       <span *ngIf="searchType == 'Artistas'" class="glyphicon glyphicon-user" style="margin-right: 2px;"></span>
       <span *ngIf="searchType == 'Canciones'" class="glyphicon glyphicon-music" style="margin-right: 2px;"></span>
+      <span *ngIf="searchType == 'Álbumes'" class="glyphicon glyphicon-cd" style="margin-right: 2px;"></span>
       {{searchType}}
     </button>
     <div class="form-group">
