@@ -1,8 +1,9 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { AfterViewInit, Component, NgModule, OnInit } from '@angular/core';
 import { PlaylistService } from 'src/app/services/PlaylistService/playlist.service';
 import { UserService } from 'src/app/services/UserService/user.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Chart, registerables } from 'chart.js';
+
 Chart.register(...registerables);
 
 
@@ -11,7 +12,7 @@ Chart.register(...registerables);
   templateUrl: './user-component.component.html',
   styleUrls: ['./user-component.component.css']
 })
-export class UserComponentComponent implements OnInit {
+export class UserComponentComponent implements OnInit, AfterViewInit {
 
   //initialize to avoid bug displaying while not being logged
   profilePicUrl: string = '';
@@ -26,25 +27,39 @@ export class UserComponentComponent implements OnInit {
   playlistSuccess: boolean = false;
   genreCounts: any = null;
   genreChart: any;
+  dataLoaded: boolean = false;
 
   constructor(private loginservice: LoginService, private userservice: UserService, private playlistService: PlaylistService) {
   }
 
   async ngOnInit() {
 
-    if (!this.loginservice.checkLog()) {
+  if (!this.loginservice.checkLog()) {
     console.log("User is not logged in — stopping ngOnInit");
     return;
-    }
-
-    this.nombreUsuario = await this.getName();
-    this.profilePicUrl = await this.getProfilePic();
-    this.followers = await this.getFollowers();
-    this.recentItems = await this.getRecentItems('tracks', 'medium_term');
-    this.recentArtists = await this.getRecentItems('artists', 'medium_term');
-    this.extractGenres();
-    this.buildGenreChart();
   }
+
+  this.nombreUsuario = await this.getName();
+  this.profilePicUrl = await this.getProfilePic();
+  this.followers = await this.getFollowers();
+
+  // Wait for items to load
+  this.recentItems = await this.getRecentItems('tracks', 'medium_term');
+  this.recentArtists = await this.getRecentItems('artists', 'medium_term');
+  this.dataLoaded = true; 
+  // Build chart only after artists exist
+  this.extractGenres();
+  this.buildGenreChart();
+}
+
+ngAfterViewInit() {
+  const interval = setInterval(() => {
+    if (this.dataLoaded) {
+      this.buildGenreChart();
+      clearInterval(interval);
+    }
+  }, 50);
+}
 
 
   getUris() {//Devuelve un string de varias canciones
@@ -105,6 +120,10 @@ export class UserComponentComponent implements OnInit {
     //this.type = (this.type === 'tracks'? 'artists': 'tracks');
     this.recentItems = await this.getRecentItems('tracks', this.term);
     this.recentArtists = await this.getRecentItems('artists', this.term);
+
+    //update chart
+    this.extractGenres(); 
+    this.buildGenreChart(); 
   }
 
   async getRecentItems(type: string, term: string) {

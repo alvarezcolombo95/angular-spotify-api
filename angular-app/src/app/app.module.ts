@@ -23,6 +23,7 @@ import { ArtistComponent } from './components/artist/artist/artist.component';
 import { NoSesionComponent } from './components/NoSesion/no-sesion/no-sesion.component';
 import { logGuard } from './services/log-guard.guard';
 import { HttpClientModule } from '@angular/common/http';
+import { SearchResultAlbumComponent } from './search-result-album/search-result-album.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { HttpClientModule } from '@angular/common/http';
     TrackComponent,
     DetailSongComponent,
     ArtistComponent,
-    NoSesionComponent
+    NoSesionComponent,
+    SearchResultAlbumComponent
   ],
   imports: [
     BrowserModule,
