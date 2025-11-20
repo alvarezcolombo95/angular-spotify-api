@@ -1,1 +1,41 @@
-<p>detail-album works!</p>
+<div class="container">
+    <div class="container-top">
+        <div *ngIf="albumResult" class="media margin-cont">
+
+            <div class="media-left">
+                <img
+                class="media-object"
+                style="width: 200px; height: 200px;"
+                [src]="albumResult.images?.[0]?.url"
+                alt="Album cover"
+                >
+            </div>
+
+            <div class="media-body">
+                <h4 class="media-heading" style="font-size: 60px; margin-bottom: 15px; margin-top: 15px;">
+                {{ albumResult.name }}
+                </h4>
+
+                <span *ngFor="let artist of albumResult.artists; let isLast = last" style="font-size: x-large;">
+                {{ artist.name }}{{ isLast ? '' : ', ' }}
+                </span>
+
+                <p>{{ albumResult.release_date ? albumResult.release_date.slice(0,4) : '—' }}</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="tracklist" *ngIf="albumResult?.tracks?.items">
+        <h3>Lista de Canciones</h3>
+
+        <div *ngFor="let track of albumResult.tracks.items" class="track-row">
+            <span class="track-title">
+            <strong>{{ track.track_number }}.</strong> {{ track.name }}
+            </span>
+            <span class="track-duration">
+            {{ formatDuration(track.duration_ms) }}
+            </span>
+        </div>
+    </div>
+</div>

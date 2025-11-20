@@ -281,7 +281,7 @@ export class SpotifySearchItemService {
       return new Promise(async (resolve, reject) => {
         const data =null;
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://api.spotify.com/v1/albums' + input);
+        xhr.open('GET', 'https://api.spotify.com/v1/albums/' + input);
         xhr.setRequestHeader('Authorization', `Bearer ${await this.GetToken()}`);
     
         xhr.onload = function () { 
