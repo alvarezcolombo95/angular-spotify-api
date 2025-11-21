@@ -1,11 +1,10 @@
-img{
-    height: 300px;
-    width: 300px;
+.profile-pic{
+    width: 100px;
+    height: 100px;
+    margin: 20px;
     border-radius: 150px;
     display: flex;
     float: left;
-    margin-right: 20px;
-    margin-left: 0px;
 }
 .btn{
     margin: 10px;
@@ -39,19 +38,12 @@ img{
 .profile-info{
     display: flex;
     flex-direction: column;
-    margin-top: 15%;
+    margin-top: 2%;
     margin-right: 0px;
     font-size: 30px;
     font-weight: bold !important;
        
 }
-
-.profile-pic{
-    width: 100px;
-    height: 100px;
-    margin: 20px;
-}
-
 .container{
     display: flex;
     padding-top: 20px;
@@ -63,16 +55,17 @@ img{
 
 .container-info{
     display: flex;
-
-
 }
+
 .borde{
     border: 5px solid #181515;
     border-radius: 28px;
 }
+
 .col-1{
     width: 50%;
 }
+
 .col-2{
     width: 50%;
 }
@@ -80,3 +73,4 @@ img{
 .recent{
     text-align: center;
 }
+

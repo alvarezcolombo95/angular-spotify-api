@@ -226,12 +226,20 @@ ngAfterViewInit() {
       type: "doughnut",
       data: {
         labels: labels,
+        
         datasets: [{
           data: values,
           backgroundColor: this.generateColors(labels.length)
-        }]
-      }
-    });
+        }],        
+      },
+      options: {
+        plugins: {
+          legend: {
+            position: 'right'
+          }
+        }
+      }  
+    });    
   }
 
   //Generate random colors for the chart
