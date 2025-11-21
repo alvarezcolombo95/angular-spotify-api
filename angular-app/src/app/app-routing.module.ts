@@ -12,6 +12,7 @@ import { PlayerComponent } from './components/playerComponent/player/player.comp
 import { logGuard } from './services/log-guard.guard';
 import { UserComponentComponent } from './components/UserInfo/user-component/user-component.component';
 import { NoSesionComponent } from './components/NoSesion/no-sesion/no-sesion.component';
+import { MyRatingsComponent } from './my-ratings/my-ratings.component';
 
 
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'no-sesion', component: NoSesionComponent},
   {path: 'player', component: PlayerComponent, canActivate: [logGuard]},
   {path: 'user', component: UserComponentComponent, canActivate: [logGuard]},
+  {path: 'my-ratings', component: MyRatingsComponent},
   {path: '**', component: LandingComponent },
   {path: '', component: LandingComponent }
   

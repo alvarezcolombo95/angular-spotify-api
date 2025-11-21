@@ -1,0 +1,19 @@
+.ratings-container {
+  padding: 20px;
+}
+
+.rating-block {
+  margin-bottom: 25px;
+}
+
+.stars {
+  font-size: 24px;
+  color: gold;
+  margin-bottom: 5px;
+}
+
+ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+}
