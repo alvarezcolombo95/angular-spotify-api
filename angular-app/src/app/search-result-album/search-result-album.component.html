@@ -12,6 +12,9 @@
 
       <div class="media-body">
           <h5 class="media-heading album-title">{{ item.name }}</h5>
+          <p class="album-year text-muted" *ngFor="let artist of item.artists; let isLast = last">
+                {{ artist.name }}{{ isLast ? '' : ', ' }}
+          </p>
           <p class="album-year text-muted">{{ item.release_date?.slice(0,4) }}</p>
 
            <div class="rating-stars">
