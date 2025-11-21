@@ -1,5 +1,6 @@
 import { Component, Input, SimpleChanges} from '@angular/core';
 import { SpotifySearchItemService } from '../services/spotify-search-item.service';
+import { RatingService } from '../services/rating.service';
 
 @Component({
  selector: 'app-detail-album',
@@ -11,12 +12,13 @@ export class DetailAlbumComponent{
 
     @Input() id: string = '';
     albumResult: any = null;
-    
+    currentRating: number = 0;    
 
-    constructor(private spotifyService: SpotifySearchItemService) {}
+    constructor(private spotifyService: SpotifySearchItemService, private ratingService: RatingService) {}
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes['id']) {
+            this.currentRating = this.ratingService.getRating(this.id) ?? 0; //default to zero
             this.doSomething(changes['id'].currentValue);
         }
     }
@@ -33,7 +35,13 @@ export class DetailAlbumComponent{
     switchId(id: string)
     {
         this.id = id;
+          this.currentRating = this.ratingService.getRating(id) ?? 0;  //default to zero
         this.callService();
+    }
+
+    rate(stars: number) {
+    this.currentRating = stars;
+    this.ratingService.setRating(this.id, stars);
     }
 
     formatDuration(ms: number): string {

@@ -47,3 +47,20 @@
 .track-duration {
   color: #666;
 }
+
+/*star rating*/
+.rating-stars {
+  font-size: 32px;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.star {
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.star.filled {
+  color: gold;
+}
