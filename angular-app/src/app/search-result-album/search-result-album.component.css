@@ -66,3 +66,19 @@
   text-overflow: ellipsis;    /* … at the end */
   max-width: 500px;           /* adjust based on your layout */
 }
+
+.rating-stars {
+  margin: 5px 0 10px 0;
+}
+
+.star {
+  font-size: 17px;
+  cursor: pointer;
+  color: #aaa;
+  transition: color 0.2s ease;
+  margin-right: 3px;
+}
+
+.star.filled {
+  color: gold;
+}

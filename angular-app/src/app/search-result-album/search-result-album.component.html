@@ -1,18 +1,40 @@
 <div class="container-main" *ngIf="searchResult && searchResult.albums && searchResult.albums.items">
   <h2 class="page-header title" style="margin-left: 15px; margin-bottom: 20px;">Álbumes</h2>
   <div class="container-results">
-      <div class="media" *ngFor="let item of searchResult.albums.items">
-          <div class="media-left">
-              <a href="#">
-                <img class="media-object" style="width: 115px; height: 115px; margin-left: 15px;" src="{{item.images && item.images.length > 0 ? item.images[0].url : '/assets/img/default-image-artist.png'}}" alt="Card image cap">
-              </a>
+    <div class="media" *ngFor="let item of searchResult.albums.items">
+      <div class="media-left">
+          <img
+            class="media-object"
+            style="width: 115px; height: 115px; margin-left: 15px;"
+            [src]="item.images?.[0]?.url || '/assets/img/default-image-artist.png'"
+          >
+      </div>
+
+      <div class="media-body">
+          <h5 class="media-heading album-title">{{ item.name }}</h5>
+          <p class="album-year text-muted">{{ item.release_date?.slice(0,4) }}</p>
+
+           <div class="rating-stars">
+              <span
+                  class="star"
+                  *ngFor="let star of getStarsArray(5)"
+                  (click)="rate(item.id, star)"
+                  [class.filled]="star <= getRating(item.id)"
+              >
+                  ★
+              </span>
           </div>
-          <div class="media-body">
-            <h5 class="media-heading album-title">{{item.name}}</h5>
-            <p class="album-year text-muted" style="margin: 0 0 8px 0;">{{ item.release_date ? item.release_date.slice(0,4) : '—' }}</p>
-            <button style="font-size: smaller; padding: 5px;" type="button" class="btn btn-default" (click)="(viewDetails(item.id))">Ver Detalles</button>
-          </div>
-      </div> 
+
+          <button
+            style="font-size: smaller; padding: 5px;"
+            type="button"
+            class="btn btn-default"
+            (click)="viewDetails(item.id)"
+          >
+            Ver Detalles
+          </button>
+      </div>
+    </div> 
   </div> 
   
   <div class="container-right">
