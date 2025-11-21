@@ -48,6 +48,26 @@
   color: #666;
 }
 
+.album-title{
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 5px;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+
+    /* Standard property (new spec) */
+    line-clamp: 2;
+
+    /* Vendor-prefixed fallback for all Chromium / Safari */
+    -webkit-line-clamp: 2;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 850px;
+}
+
 /*star rating*/
 .rating-stars {
   font-size: 32px;

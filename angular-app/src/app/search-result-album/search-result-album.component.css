@@ -5,6 +5,10 @@
     position: absolute;   
 }
 
+.album-year{
+    margin: 0px;
+}
+
 .title{
     width: 37%;
 }
@@ -68,11 +72,11 @@
 }
 
 .rating-stars {
-  margin: 5px 0 10px 0;
+  margin: 0px 0 3px 0;
 }
 
 .star {
-  font-size: 17px;
+  font-size: 15px;
   cursor: pointer;
   color: #aaa;
   transition: color 0.2s ease;
