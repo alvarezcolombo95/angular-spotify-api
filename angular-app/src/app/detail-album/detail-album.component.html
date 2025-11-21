@@ -15,12 +15,23 @@
                 <h4 class="media-heading" style="font-size: 60px; margin-bottom: 15px; margin-top: 15px;">
                 {{ albumResult.name }}
                 </h4>
+                
 
                 <span *ngFor="let artist of albumResult.artists; let isLast = last" style="font-size: x-large;">
                 {{ artist.name }}{{ isLast ? '' : ', ' }}
                 </span>
 
                 <p>{{ albumResult.release_date ? albumResult.release_date.slice(0,4) : '—' }}</p>
+                
+                <div class="rating-stars"><span style="font-size: 30px; font-style: italic;"></span>
+                    <span 
+                        *ngFor="let star of [1,2,3,4,5]"
+                        (click)="rate(star)"
+                        class="star"
+                        [class.filled]="star <= currentRating">
+                        ★
+                    </span>
+                </div>
             </div>
 
         </div>
