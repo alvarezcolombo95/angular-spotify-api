@@ -1,21 +1,22 @@
 <div *ngIf="!!this.isLoged(); else sesionNoIniciada" class="container">
     <div class="col-1 borde">
-        
+        <h3 style="text-align: center; font-size: 40px; font-weight: bold;">Información del Perfil</h3>
         <div class="container-info">
             <img class="profile-pic" [src]="profilePicUrl" alt="User Profile Picture">
             <div class="profile-info">
-                <h2 style="font-size: 50px; font-weight: bold;">{{nombreUsuario}}</h2>
+                <h2 style="font-size: 25px; font-weight: bold;">{{nombreUsuario}}</h2>
                 <h6>Followers: {{followers}}</h6>
             </div> 
         </div>
-        <div *ngIf="genreCounts && recentArtists.length > 0" style="width: 400px; margin: auto;">
-            <h3 style="text-align:center;">Tus géneros más escuchados</h3>
+        
+        <div *ngIf="genreCounts && recentArtists.length > 0" style="width: 500px; margin: auto;">
+            <h3 style="text-align:center; margin-top:100px; font-size: 40px; font-weight: bold;">Géneros mas escuchados</h3>
             <canvas id="genreChartCanvas"></canvas>
         </div>
                
     </div>
     <div class="recent col-2 borde">
-        <h3>Esto es lo que has estado escuchando!</h3>
+        <h3 style="font-size: 40px; font-weight: bold;">Escuchados recientemente</h3>
         <br>
         <button type="button" (click)="toggleShowType()" class="btn btn-default">
             {{showType}}
