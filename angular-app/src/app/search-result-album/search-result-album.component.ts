@@ -3,6 +3,7 @@ import { SearchCommService } from '../services/search-comm.service';
 import { tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { RatingService } from '../services/rating.service';
 
 @Component({
   selector: 'app-search-result-album',
@@ -17,7 +18,7 @@ export class SearchResultAlbumComponent implements OnInit {
   displayDetails: boolean = false;
   idDetails: string = ''
 
-  constructor(private data: SearchCommService) {}
+  constructor(private data: SearchCommService, private ratingService: RatingService) {}
 
   ngOnInit(): void {
 
@@ -36,6 +37,21 @@ export class SearchResultAlbumComponent implements OnInit {
   {
     this.idDetails = id;
     this.displayDetails = true;
+  }
+
+   /** Get stored rating for album */
+  getRating(albumId: string): number {
+    return this.ratingService.getRating(albumId) ?? 0;
+  }
+
+  /** Click to save rating */
+  rate(albumId: string, value: number) {
+    this.ratingService.setRating(albumId, value);
+  }
+
+  /** Helper for *ngFor stars */
+  getStarsArray(n: number): number[] {
+    return Array.from({ length: n }, (_, i) => i + 1);
   }
 
   
