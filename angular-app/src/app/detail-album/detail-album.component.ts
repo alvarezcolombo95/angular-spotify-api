@@ -39,6 +39,11 @@ export class DetailAlbumComponent{
         this.callService();
     }
 
+       /** Get stored rating for album */
+    getRating(albumId: string): number {
+        return this.ratingService.getRating(albumId) ?? 0;
+    }
+
     rate(albumId: string, value: number, albumName: string, albumArtists: Array<{ name: string }>) {
   this.ratingService.setRating(
     albumId,
