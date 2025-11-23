@@ -39,10 +39,14 @@ export class DetailAlbumComponent{
         this.callService();
     }
 
-    rate(stars: number) {
-    this.currentRating = stars;
-    this.ratingService.setRating(this.id, stars);
-    }
+    rate(albumId: string, value: number, albumName: string, albumArtists: Array<{ name: string }>) {
+  this.ratingService.setRating(
+    albumId,
+    value,
+    albumName,
+    albumArtists.map(a => a.name).join(', ')
+  );
+}
 
     formatDuration(ms: number): string {
         const totalSeconds = Math.floor(ms / 1000);

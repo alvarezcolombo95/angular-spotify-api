@@ -26,32 +26,29 @@ export class MyRatingsComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    const ratings = this.ratingService.getRatingsSorted(); // highest first
-    const grouped: { [stars: number]: DisplayRatingGroup } = {};
+  const ratings = this.ratingService.getRatingsSorted();
+  const grouped: { [stars: number]: DisplayRatingGroup } = {};
 
-    for (const entry of ratings) {
-      // Load album details from Spotify
-      const album: any = await this.spotifyService.asyncCallGetAlbum(entry.albumId);
+  for (const entry of ratings) {
 
-      const albumInfo = {
-        id: entry.albumId,
-        name: album.name,
-        artists: album.artists.map((a: any) => a.name).join(', ')
+    const albumInfo = {
+      id: entry.albumId,
+      name: entry.name,
+      artists: entry.artists
+    };
+
+    if (!grouped[entry.rating]) {
+      grouped[entry.rating] = {
+        stars: entry.rating,
+        albums: []
       };
-
-      if (!grouped[entry.rating]) {
-        grouped[entry.rating] = {
-          stars: entry.rating,
-          albums: []
-        };
-      }
-
-      grouped[entry.rating].albums.push(albumInfo);
     }
 
-    // Convert object → array sorted by stars descending
-    this.ratingGroups = Object.values(grouped).sort((a, b) => b.stars - a.stars);
+    grouped[entry.rating].albums.push(albumInfo);
   }
+
+  this.ratingGroups = Object.values(grouped).sort((a, b) => b.stars - a.stars);
+}
 
   getStarsArray(n: number) {
     return Array(n).fill(0);
