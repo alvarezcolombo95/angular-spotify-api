@@ -143,6 +143,7 @@ ngAfterViewInit() {
       const response = await this.userservice.getUser();
       const data = await response.json();
       console.log(data);
+      console.log(data.product + 'porque soy re cheto')
       console.log(data.display_name);
       return data.display_name;
     } catch (error) {
