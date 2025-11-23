@@ -45,9 +45,14 @@ export class SearchResultAlbumComponent implements OnInit {
   }
 
   /** Click to save rating */
-  rate(albumId: string, value: number) {
-    this.ratingService.setRating(albumId, value);
-  }
+  rate(albumId: string, value: number, albumName: string, albumArtists: Array<{ name: string }>) {
+  this.ratingService.setRating(
+    albumId,
+    value,
+    albumName,
+    albumArtists.map(a => a.name).join(', ')
+  );
+}
 
   /** Helper for *ngFor stars */
   getStarsArray(n: number): number[] {

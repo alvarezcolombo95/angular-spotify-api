@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 
 export interface AlbumRating {
   albumId: string;
-  rating: number; // 1-5 stars
+  rating: number;
+  name: string;      // NEW
+  artists: string;   // NEW
 }
 
 @Injectable({
@@ -26,18 +28,25 @@ export class RatingService {
   }
 
   /** Set rating for an album */
-  setRating(albumId: string, rating: number) {
-    const ratings = this.loadRatings();
+  setRating(albumId: string, rating: number, name: string, artists: string) {
+  const ratings = this.loadRatings();
 
-    const existing = ratings.find(r => r.albumId === albumId);
-    if (existing) {
-      existing.rating = rating;
-    } else {
-      ratings.push({ albumId, rating });
-    }
-
-    this.saveRatings(ratings);
+  const existing = ratings.find(r => r.albumId === albumId);
+  if (existing) {
+    existing.rating = rating;
+    existing.name = name;
+    existing.artists = artists;
+  } else {
+    ratings.push({
+      albumId,
+      rating,
+      name,
+      artists
+    });
   }
+
+  this.saveRatings(ratings);
+}
 
   /** Get rating of a specific album */
   getRating(albumId: string): number | null {

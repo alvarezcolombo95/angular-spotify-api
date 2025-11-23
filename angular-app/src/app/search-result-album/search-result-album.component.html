@@ -21,7 +21,7 @@
               <span
                   class="star"
                   *ngFor="let star of getStarsArray(5)"
-                  (click)="rate(item.id, star)"
+                  (click)="rate(item.id, star, item.name, item.artists)"
                   [class.filled]="star <= getRating(item.id)"
               >
                   ★
