@@ -38,7 +38,9 @@ export class LogInComponent implements OnInit {
 
 
    async whenCLick() {
+    console.log("CLICKED LOGIN");
     const url = await this.loginService.getUrlLogin();
+    console.log("REDIRECTING TO:", url);
     window.location.href = url;
   }
 

@@ -14,7 +14,7 @@ export const logGuard: CanActivateFn =(
     else{
       router.navigate(['no-sesion'])
       setTimeout(() => {
-      alert('Debe iniciar sesión   para acceder a esta funcion')
+      alert('Debe iniciar sesión para acceder a esta función.')
       router.navigate(['log-in'])
       }, 500);
       return false;

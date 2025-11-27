@@ -9,6 +9,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 export class LoginService implements OnInit {
 
   constructor(private http: HttpClient) {
+    console.log("LOGIN SERVICE LOADED");
     this.token = localStorage.getItem('token') || '';
    }
 
@@ -38,23 +39,25 @@ export class LoginService implements OnInit {
   }
   // --- end PKCE helpers ---
 
-  async getUrlLogin() {
-    // Generate PKCE verifier + challenge
-    const verifier = this.generateRandomString(64);
-    const challenge = await this.generateCodeChallenge(verifier);
+async getUrlLogin() {
+  const verifier = this.generateRandomString(64);
+  const challenge = await this.generateCodeChallenge(verifier);
+  localStorage.setItem('pkce_verifier', verifier);
 
-    // Save verifier for later (used after redirect)
-    localStorage.setItem('pkce_verifier', verifier);
+  const url = new URL(SpotifyConfiguration.authEndpoint);
 
-    const authEndPoint = `${SpotifyConfiguration.authEndpoint}?`;
-    const clientId = `client_id=${SpotifyConfiguration.clientId}&`;
-    const redirectUrl = `redirect_uri=${SpotifyConfiguration.redirectUrl}&`;
-    const scopes = `scope=${SpotifyConfiguration.scope.join('%20')}&`;
-    
-    const responseType = `response_type=code&code_challenge_method=S256&code_challenge=${challenge}&show_dialog=true`;
+  url.searchParams.set("client_id", SpotifyConfiguration.clientId);
+  url.searchParams.set("redirect_uri", SpotifyConfiguration.redirectUrl);
+  url.searchParams.set("response_type", "code");
+  url.searchParams.set("code_challenge_method", "S256");
+  url.searchParams.set("code_challenge", challenge);
+  url.searchParams.set("show_dialog", "true");
+  url.searchParams.set("scope", SpotifyConfiguration.scope.join(" "));
 
-    return authEndPoint + clientId + redirectUrl + scopes + responseType;
-  }
+  console.log("FINAL URL:", url.toString());
+
+  return url.toString();
+}
 
   // HANDLE AUTH CALLBACK //
   async handleAuthCallback() {
