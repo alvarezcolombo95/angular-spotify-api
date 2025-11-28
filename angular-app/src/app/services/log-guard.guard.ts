@@ -9,7 +9,7 @@ export const logGuard: CanActivateFn =(
     const authService = inject(LoginService);
     const router = inject(Router);
 
-    if (authService.checkLog())
+    if (true) //UPDATED TO AVOID LOG GUARD FOR NOW
         return true;
     else{
       router.navigate(['no-sesion'])

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RatingService, AlbumRating } from '../services/rating.service';
-import { SpotifySearchItemService } from '../services/spotify-search-item.service';
+import { LoginService } from 'src/app/services/login.service';
 
 interface DisplayRatingGroup {
   stars: number;
@@ -20,37 +20,41 @@ export class MyRatingsComponent implements OnInit {
 
   ratingGroups: DisplayRatingGroup[] = [];
 
-  constructor(
-    private ratingService: RatingService,
-    private spotifyService: SpotifySearchItemService
-  ) {}
+  constructor(private ratingService: RatingService, private loginService: LoginService) {}
 
-  async ngOnInit() {
-  const ratings = this.ratingService.getRatingsSorted();
-  const grouped: { [stars: number]: DisplayRatingGroup } = {};
+  ngOnInit() {
+    this.ratingService.getAllRatings().subscribe((ratings: AlbumRating[]) => {
 
-  for (const entry of ratings) {
+      const grouped: { [stars: number]: DisplayRatingGroup } = {};
 
-    const albumInfo = {
-      id: entry.albumId,
-      name: entry.name,
-      artists: entry.artists
-    };
+      for (const entry of ratings) {
+        const albumInfo = {
+          id: entry.albumId,
+          name: entry.name,
+          artists: entry.artists
+        };
 
-    if (!grouped[entry.rating]) {
-      grouped[entry.rating] = {
-        stars: entry.rating,
-        albums: []
-      };
-    }
+        if (!grouped[entry.rating]) {
+          grouped[entry.rating] = {
+            stars: entry.rating,
+            albums: []
+          };
+        }
+        grouped[entry.rating].albums.push(albumInfo);
+      }
 
-    grouped[entry.rating].albums.push(albumInfo);
+      this.ratingGroups = Object.values(grouped).sort((a, b) => b.stars - a.stars);
+    });
   }
-
-  this.ratingGroups = Object.values(grouped).sort((a, b) => b.stars - a.stars);
-}
 
   getStarsArray(n: number) {
     return Array(n).fill(0);
+  }
+
+  isLoged() {
+  if (this.loginService.checkLog())
+    return 1;
+  else
+    return 0;
   }
 }

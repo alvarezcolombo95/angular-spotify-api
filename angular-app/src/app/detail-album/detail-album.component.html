@@ -28,7 +28,7 @@
                         class="star"
                         *ngFor="let star of [1,2,3,4,5]"
                         (click)="rate(albumResult.id, star, albumResult.name, albumResult.artists)"
-                        [class.filled]="star <= getRating(albumResult.id)">
+                        [class.filled]="star <= currentRating">
                         ★
                     </span>
                 </div>

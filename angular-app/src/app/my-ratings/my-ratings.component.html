@@ -1,4 +1,4 @@
-<div class="ratings-container">
+<div *ngIf="!!this.isLoged(); else sesionNoIniciada" class="ratings-container">
 
   <h2 style="font-weight: bold;">Ratings</h2>
 
@@ -19,3 +19,9 @@
   </div>
 
 </div>
+
+<ng-template #sesionNoIniciada>
+    <div >
+        <app-no-sesion></app-no-sesion>
+    </div>
+</ng-template>

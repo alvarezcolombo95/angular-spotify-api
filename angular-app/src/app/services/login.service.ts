@@ -62,6 +62,18 @@ async getUrlLogin() {
   // HANDLE AUTH CALLBACK //
   async handleAuthCallback() {
   await this.getTokenFromUrl();
+
+  // NEW: fetch user profile to get ID
+  const profileResp = await fetch('https://api.spotify.com/v1/me', {
+    headers: { Authorization: 'Bearer ' + this.token }
+  });
+
+  const profile = await profileResp.json();
+
+  if (profile?.id) {
+    localStorage.setItem('spotify_user_id', profile.id);
+    console.log("Saved Spotify user ID:", profile.id);
+  }
 }
 
 

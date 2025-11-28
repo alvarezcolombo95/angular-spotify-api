@@ -1,64 +1,56 @@
-import { Component, Input, SimpleChanges} from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { SpotifySearchItemService } from '../services/spotify-search-item.service';
 import { RatingService } from '../services/rating.service';
 
 @Component({
- selector: 'app-detail-album',
- templateUrl: './detail-album.component.html',
- styleUrls: ['./detail-album.component.css']
+  selector: 'app-detail-album',
+  templateUrl: './detail-album.component.html',
+  styleUrls: ['./detail-album.component.css']
 })
-export class DetailAlbumComponent{
+export class DetailAlbumComponent {
 
+  @Input() id: string = '';
+  albumResult: any = null;
+  currentRating: number = 0;
 
-    @Input() id: string = '';
-    albumResult: any = null;
-    currentRating: number = 0;    
+  constructor(
+    private spotifyService: SpotifySearchItemService,
+    private ratingService: RatingService
+  ) {}
 
-    constructor(private spotifyService: SpotifySearchItemService, private ratingService: RatingService) {}
-
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes['id']) {
-            this.currentRating = this.ratingService.getRating(this.id) ?? 0; //default to zero
-            this.doSomething(changes['id'].currentValue);
-        }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['id']) {
+      this.loadRating();
+      this.callService();
     }
- 
-    doSomething(value: string) {
-        this.callService()
-    }
+  }
 
-    async callService()
-    {
-        this.albumResult = await this.spotifyService.asyncCallGetAlbum(this.id);
-    }
+  /** Load rating from backend */
+  loadRating() {
+    if (!this.id) return;
+    this.ratingService.getRating(this.id).subscribe(r => {
+      this.currentRating = r?.rating ?? 0;
+    });
+  }
 
-    switchId(id: string)
-    {
-        this.id = id;
-          this.currentRating = this.ratingService.getRating(id) ?? 0;  //default to zero
-        this.callService();
-    }
+  /** Get album data from Spotify */
+  async callService() {
+    this.albumResult = await this.spotifyService.asyncCallGetAlbum(this.id);
+  }
 
-       /** Get stored rating for album */
-    getRating(albumId: string): number {
-        return this.ratingService.getRating(albumId) ?? 0;
-    }
+  /** Rate album */
+  rate(albumId: string, value: number, name: string, artistsArr: Array<{ name: string }>) {
+    const artists = artistsArr.map(a => a.name).join(', ');
 
-    rate(albumId: string, value: number, albumName: string, albumArtists: Array<{ name: string }>) {
-  this.ratingService.setRating(
-    albumId,
-    value,
-    albumName,
-    albumArtists.map(a => a.name).join(', ')
-  );
-}
+    this.ratingService.setRating(albumId, value, name, artists).subscribe(() => {
+      this.currentRating = value;  // update UI after saving
+    });
+  }
 
-    formatDuration(ms: number): string {
-        const totalSeconds = Math.floor(ms / 1000);
-        const minutes = Math.floor(totalSeconds / 60);
-        const seconds = totalSeconds % 60;
-        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-    }
-
-    
+  formatDuration(ms: number): string {
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  }
 }
