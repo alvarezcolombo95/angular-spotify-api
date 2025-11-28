@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of, Subject, tap } from 'rxjs';
 
 export interface AlbumRating {
   albumId: string;
@@ -14,25 +14,35 @@ export interface AlbumRating {
 })
 export class RatingService {
 
-  private apiUrl = 'http://localhost:3000/ratings';  // backend URL
-  
+  private apiUrl = 'http://localhost:3000/ratings';
 
-  constructor(private http: HttpClient) { }
+  // Notify components when a rating is created/updated
+  ratingChanged = new Subject<void>();
 
-  /** List all ratings for logged-in user */
+  constructor(private http: HttpClient) {}
+
+  /** Returns Spotify user ID from localStorage */
+  private getUserId(): string | null {
+    return localStorage.getItem('spotify_user_id');
+  }
+
+  /** Get ALL ratings for the logged user */
   getAllRatings(): Observable<AlbumRating[]> {
-    return this.http.get<AlbumRating[]>(this.apiUrl);
+    const userId = this.getUserId();
+    if (!userId) return of([]);
+    return this.http.get<AlbumRating[]>(`${this.apiUrl}/${userId}`);
   }
 
-  /** Get one album rating */
+  /** Get rating for a specific album */
   getRating(albumId: string): Observable<AlbumRating | null> {
-    return this.http.get<AlbumRating | null>(`${this.apiUrl}/${albumId}`);
+    const userId = this.getUserId();
+    if (!userId) return of(null);
+    return this.http.get<AlbumRating | null>(`${this.apiUrl}/${userId}/${albumId}`);
   }
 
-  /** Set/update rating */
+  /** Create or update a rating */
   setRating(albumId: string, rating: number, name: string, artists: string) {
-
-    const userId = localStorage.getItem('spotify_user_id');
+    const userId = this.getUserId();
 
     return this.http.post(this.apiUrl, {
       userId,
@@ -40,6 +50,11 @@ export class RatingService {
       rating,
       name,
       artists
-    });
+    }).pipe(
+      tap(() => {
+        // Emit event so UI refreshes everywhere
+        this.ratingChanged.next();
+      })
+    );
   }
 }

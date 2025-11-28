@@ -23,7 +23,7 @@
 
                 <p>{{ albumResult.release_date ? albumResult.release_date.slice(0,4) : '—' }}</p>
                 
-                <div class="rating-stars"><span style="font-size: 30px; font-style: italic;"></span>
+                <div *ngIf="this.isLoged()" class="rating-stars"><span style="font-size: 30px; font-style: italic;"></span>
                     <span 
                         class="star"
                         *ngFor="let star of [1,2,3,4,5]"

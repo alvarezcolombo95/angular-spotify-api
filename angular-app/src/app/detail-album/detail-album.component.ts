@@ -1,6 +1,7 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { SpotifySearchItemService } from '../services/spotify-search-item.service';
 import { RatingService } from '../services/rating.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-detail-album',
@@ -15,15 +16,18 @@ export class DetailAlbumComponent {
 
   constructor(
     private spotifyService: SpotifySearchItemService,
-    private ratingService: RatingService
+    private ratingService: RatingService,
+    private loginService: LoginService
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['id']) {
-      this.loadRating();
-      this.callService();
+        this.loadRating();
+        this.callService();
     }
-  }
+
+    this.ratingService.ratingChanged.subscribe(() => this.loadRating());
+    }
 
   /** Load rating from backend */
   loadRating() {
@@ -52,5 +56,12 @@ export class DetailAlbumComponent {
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  }
+
+  isLoged() {
+  if (this.loginService.checkLog())
+    return 1;
+  else
+    return 0;
   }
 }

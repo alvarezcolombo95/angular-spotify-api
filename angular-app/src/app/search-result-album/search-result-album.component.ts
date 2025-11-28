@@ -3,6 +3,7 @@ import { SearchCommService } from '../services/search-comm.service';
 import { tap, filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { RatingService, AlbumRating } from '../services/rating.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-search-result-album',
@@ -21,23 +22,34 @@ export class SearchResultAlbumComponent implements OnInit {
 
   constructor(
     private data: SearchCommService,
-    private ratingService: RatingService
+    private ratingService: RatingService,
+    private loginService: LoginService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+  // when new search results arrive
+  this.subscription = this.data.currentResult.pipe(
+    filter(res => res !== null),
+    tap(res => this.loadRatingsForSearch(res))
+  ).subscribe(res => this.searchResult = res);
 
-    this.subscription = this.data.currentResult.pipe(
-      filter(searchResult => searchResult !== null),
-      tap(async searchResult => {
-        // Load ratings for all albums in search results
-        for (let album of searchResult.albums.items) {
-          this.ratingService.getRating(album.id).subscribe(r => {
-            this.ratingsCache[album.id] = r?.rating ?? 0;
-          });
-        }
-      })
-    ).subscribe(searchResult => this.searchResult = searchResult);
+  // when rating changes anywhere
+  this.ratingService.ratingChanged.subscribe(() => {
+    if (this.searchResult)
+      this.loadRatingsForSearch(this.searchResult);
+  });
+}
+
+// Load rating for each album on page
+loadRatingsForSearch(res: any) {
+  if (this.searchResult?.albums?.items) {
+  for (let album of this.searchResult.albums.items) {
+    this.ratingService.getRating(album.id).subscribe(r => {
+      this.ratingsCache[album.id] = r?.rating ?? 0;
+    });
   }
+}
+}
 
   /** Get stored rating for UI */
   getRating(albumId: string): number {
@@ -61,5 +73,12 @@ export class SearchResultAlbumComponent implements OnInit {
   /** For *ngFor */
   getStarsArray(n: number): number[] {
     return Array.from({ length: n }, (_, i) => i + 1);
+  }
+
+  isLoged() {
+  if (this.loginService.checkLog())
+    return 1;
+  else
+    return 0;
   }
 }

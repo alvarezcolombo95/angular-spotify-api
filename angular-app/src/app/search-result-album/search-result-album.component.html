@@ -17,7 +17,7 @@
           </p>
           <p class="album-year text-muted">{{ item.release_date?.slice(0,4) }}</p>
 
-           <div class="rating-stars">
+           <div *ngIf="this.isLoged()" class="rating-stars">
               <span
                   class="star"
                   *ngFor="let star of getStarsArray(5)"
