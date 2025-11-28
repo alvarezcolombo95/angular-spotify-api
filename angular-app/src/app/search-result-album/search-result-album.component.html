@@ -17,6 +17,7 @@
           </p>
           <p class="album-year text-muted">{{ item.release_date?.slice(0,4) }}</p>
 
+            <p *ngIf="!this.isLoged()" class="rating-stars invisible-space">Log in to rate albums!</p>
            <div *ngIf="this.isLoged()" class="rating-stars">
               <span
                   class="star"
