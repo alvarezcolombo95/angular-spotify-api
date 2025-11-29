@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SearchCommService } from '../services/search-comm.service';
 import { tap, filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { RatingService, AlbumRating } from '../services/rating.service';
+import { RatingService } from '../services/rating.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class SearchResultAlbumComponent implements OnInit {
   displayDetails: boolean = false;
   idDetails: string = '';
 
-  ratingsCache: Record<string, number> = {};  // NEW: for quick star display
+  ratingsCache: Record<string, number> = {};
 
   constructor(
     private data: SearchCommService,
@@ -27,41 +27,45 @@ export class SearchResultAlbumComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-  // when new search results arrive
-  this.subscription = this.data.currentResult.pipe(
-    filter(res => res !== null),
-    tap(res => this.loadRatingsForSearch(res))
-  ).subscribe(res => this.searchResult = res);
 
-  // when rating changes anywhere
-  this.ratingService.ratingChanged.subscribe(() => {
-    if (this.searchResult)
-      this.loadRatingsForSearch(this.searchResult);
-  });
-}
+    this.subscription = this.data.currentResult.pipe(
+      filter(res => res !== null),
+      tap(res => {
+        // FIRST update searchResult
+        this.searchResult = res;
 
-// Load rating for each album on page
-loadRatingsForSearch(res: any) {
-  if (this.searchResult?.albums?.items) {
-  for (let album of this.searchResult.albums.items) {
-    this.ratingService.getRating(album.id).subscribe(r => {
-      this.ratingsCache[album.id] = r?.rating ?? 0;
+        // THEN load ratings safely
+        this.loadRatingsForSearch(res);
+      })
+    ).subscribe();
+
+    // Listen for rating updates
+    this.ratingService.ratingChanged.subscribe(() => {
+      if (this.searchResult)
+        this.loadRatingsForSearch(this.searchResult);
     });
   }
-}
-}
 
-  /** Get stored rating for UI */
+  /** Load ratings for all albums in the search results */
+  loadRatingsForSearch(res: any) {
+    if (!res?.albums?.items) return;
+
+    for (let album of res.albums.items) {
+      this.ratingService.getRating(album.id).subscribe(r => {
+        this.ratingsCache[album.id] = r?.rating ?? 0;
+      });
+    }
+  }
+
   getRating(albumId: string): number {
     return this.ratingsCache[albumId] ?? 0;
   }
 
-  /** When clicking a star */
   rate(albumId: string, value: number, name: string, artistsArr: Array<{ name: string }>) {
     const artists = artistsArr.map(a => a.name).join(', ');
 
     this.ratingService.setRating(albumId, value, name, artists).subscribe(() => {
-      this.ratingsCache[albumId] = value;  // Update UI
+      this.ratingsCache[albumId] = value;
     });
   }
 
@@ -70,15 +74,11 @@ loadRatingsForSearch(res: any) {
     this.displayDetails = true;
   }
 
-  /** For *ngFor */
   getStarsArray(n: number): number[] {
-    return Array.from({ length: n }, (_, i) => i + 1);
+    return Array.from({ length: n }, (_, i = 0) => i + 1);
   }
 
   isLoged() {
-  if (this.loginService.checkLog())
-    return 1;
-  else
-    return 0;
+    return this.loginService.checkLog() ? 1 : 0;
   }
 }
