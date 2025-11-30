@@ -29,7 +29,7 @@ export class DetailAlbumComponent {
     this.ratingService.ratingChanged.subscribe(() => this.loadRating());
     }
 
-  /** Load rating from backend */
+  //Cargar rating del backend
   loadRating() {
     if (!this.id) return;
     this.ratingService.getRating(this.id).subscribe(r => {
@@ -37,17 +37,17 @@ export class DetailAlbumComponent {
     });
   }
 
-  /** Get album data from Spotify */
+  //Get info de album de Spotify
   async callService() {
     this.albumResult = await this.spotifyService.asyncCallGetAlbum(this.id);
   }
 
-  /** Rate album */
+  //Rate album
   rate(albumId: string, value: number, name: string, artistsArr: Array<{ name: string }>) {
     const artists = artistsArr.map(a => a.name).join(', ');
 
     this.ratingService.setRating(albumId, value, name, artists).subscribe(() => {
-      this.currentRating = value;  // update UI after saving
+      this.currentRating = value;  // actualizar UI
     });
   }
 
