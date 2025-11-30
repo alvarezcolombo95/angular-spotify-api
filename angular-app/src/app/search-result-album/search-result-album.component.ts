@@ -31,22 +31,22 @@ export class SearchResultAlbumComponent implements OnInit {
     this.subscription = this.data.currentResult.pipe(
       filter(res => res !== null),
       tap(res => {
-        // FIRST update searchResult
+        //update searchResult
         this.searchResult = res;
 
-        // THEN load ratings safely
+        //load ratings
         this.loadRatingsForSearch(res);
       })
     ).subscribe();
 
-    // Listen for rating updates
+    //Listen for rating updates
     this.ratingService.ratingChanged.subscribe(() => {
       if (this.searchResult)
         this.loadRatingsForSearch(this.searchResult);
     });
   }
 
-  /** Load ratings for all albums in the search results */
+  //Load ratings for all albums in the search results
   loadRatingsForSearch(res: any) {
     if (!res?.albums?.items) return;
 
