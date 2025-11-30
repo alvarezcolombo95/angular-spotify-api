@@ -63,7 +63,7 @@ async getUrlLogin() {
   async handleAuthCallback() {
   await this.getTokenFromUrl();
 
-  // NEW: fetch user profile to get ID
+  // fetch user profile to get ID
   const profileResp = await fetch('https://api.spotify.com/v1/me', {
     headers: { Authorization: 'Bearer ' + this.token }
   });
