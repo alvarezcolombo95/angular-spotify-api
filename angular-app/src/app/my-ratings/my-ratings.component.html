@@ -4,12 +4,12 @@
 
   <div *ngFor="let group of ratingGroups" class="rating-block">
 
-    <!-- Stars line -->
+    <!-- Estrellas -->
     <div class="stars">
       <span *ngFor="let _ of getStarsArray(group.stars)">★</span>
     </div>
 
-    <!-- Album list -->
+    <!-- Lista de albumes -->
     <ul>
       <li *ngFor="let album of group.albums">
         {{ album.name }} - {{ album.artists }}
