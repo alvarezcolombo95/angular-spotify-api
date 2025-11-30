@@ -14,7 +14,6 @@ Chart.register(...registerables);
 })
 export class UserComponentComponent implements OnInit, AfterViewInit {
 
-  //initialize to avoid bug displaying while not being logged
   profilePicUrl: string = '';
   nombreUsuario: string = '';
   followers: number = 0;
@@ -43,11 +42,11 @@ export class UserComponentComponent implements OnInit, AfterViewInit {
   this.profilePicUrl = await this.getProfilePic();
   this.followers = await this.getFollowers();
 
-  // Wait for items to load
+  // Esperar a que carguen los items
   this.recentItems = await this.getRecentItems('tracks', 'medium_term');
   this.recentArtists = await this.getRecentItems('artists', 'medium_term');
   this.dataLoaded = true; 
-  // Build chart only after artists exist
+  // Armar el chart solo despues que cargaron los items
   this.extractGenres();
   this.buildGenreChart();
 }
@@ -61,8 +60,8 @@ ngAfterViewInit() {
   }, 50);
 }
 
-
-  getUris() {//Devuelve un string de varias canciones
+  //Devuelve un string de varias canciones
+  getUris() {
     let uriString: string = '';
     if (this.recentItems && this.recentItems.length > 0) {
       uriString = this.recentItems.map(track => track.uri).join(',');
@@ -88,8 +87,9 @@ ngAfterViewInit() {
       let playlistId = await this.playlistService.createPlaylist(token, userId, `${this.showType}-${this.termType}-${ano}-${mes}-${dia}`)
       console.log(playlistId)
       for (let i=0;i<this.recentItems.length;i++){
-        if (token != null) {// If para que la funcion tome el token//PROBAR INSISTIR SI TIRA ERROR?
-        await this.playlistService.addTrack(playlistId, token, this.recentItems[i].uri) //Agrego canciones 1 por 1 //Algunas agrega otras no!! eror 500/502
+        // If para que la funcion tome el token//PROBAR INSISTIR SI TIRA ERROR?
+        if (token != null) {
+        await this.playlistService.addTrack(playlistId, token, this.recentItems[i].uri)
         await new Promise(resolve=> setTimeout(resolve,100));
         this.playlistSuccess = true;
       }
@@ -183,7 +183,6 @@ ngAfterViewInit() {
     }
   }
 
-
   isLoged() {
     if (this.loginservice.checkLog())
       return 1;
@@ -191,7 +190,7 @@ ngAfterViewInit() {
       return 0;
   }
 
-  //Extract genres and count them
+  //Extrae generos y cuenta
   extractGenres() {
   const counts: any = {};
 
@@ -203,22 +202,22 @@ ngAfterViewInit() {
     }
   }
 
-  // Convert to array, sort, and keep top 10
+  // Convierte a array, ordena, y guarda los primeros 10
   const sorted = Object.entries(counts)
-    .sort((a: any, b: any) => b[1] - a[1])      // sort by count desc
-    .slice(0, 10);                               // keep only top 10
+    .sort((a: any, b: any) => b[1] - a[1])      
+    .slice(0, 10);                               
 
   // Rebuild as object
   this.genreCounts = Object.fromEntries(sorted);
 }
 
-  //Build the chart using Chart.js
+  //Construye chart con Chart.js
   buildGenreChart() {
     const labels = Object.keys(this.genreCounts);
     const values = Object.values(this.genreCounts);
 
     if (this.genreChart) {
-      this.genreChart.destroy(); // avoid duplicates
+      this.genreChart.destroy(); // evitar duplicates
     }
 
     this.genreChart = new Chart("genreChartCanvas", {
