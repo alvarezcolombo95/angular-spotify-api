@@ -22,7 +22,7 @@
     <div class="container-bottom">
       <h3 style="display: inline-block;">Recomendaciones</h3>
       <button style="font-size: smaller; padding: 5px; margin-left: 10px; margin-bottom: 10px; " type="button" class="btn btn-default" (click)="createPlaylist()">Generar Playlist</button>
-      <span *ngIf="playlistSuccess" style="margin-left: 10px; font-weight: bold; color: green;">Playlist creada con exito</span>
+      <span *ngIf="playlistSuccess" style="margin-left: 10px; font-weight: bold; color: red;">Esta función no está disponible</span>
       <span *ngIf="loginFailure" style="margin-left: 10px; font-weight: bold; color: red;">Debe iniciar sesion para crear playlists</span>
       <div *ngFor="let track of recomTracks | slice:0:4" style="margin: 10px;">
         <div class="media-left"> <a href="#"> <img alt="" class="media-object"
